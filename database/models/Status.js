@@ -13,4 +13,4 @@ class Status extends bookshelf.Model {
   }
 }
 
-module.exports = bookshelf.Model('Status', Status);
+module.exports = bookshelf.model('Status', Status);

@@ -13,4 +13,4 @@ class Priority extends bookshelf.Model {
   }
 }
 
-module.exports = bookshelf.Model('Priority', Priority);
+module.exports = bookshelf.model('Priority', Priority);

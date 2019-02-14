@@ -13,6 +13,10 @@ const PORT = process.env.PORT || 8080;
 const ENV = process.env.NODE_ENV || 'development';
 const SESSION_SECRET = process.env.SESSION_SECRET || 'kabob';
 
+if (!process.env.REDIS_STORE_URI) {
+  throw new Error('redis store uri not set');
+}
+
 const app = express();
 
 app.use(bodyParser.urlencoded());

@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(
   session({
-    store: new redis({ url: 'redis://redis-server:6379', logErrors: true }),
+    store: new redis({ url: process.env.REDIS_STORE_URI, logErrors: true }),
     secret: SESSION_SECRET,
     resave: false,
     cookie: { secure: ENV === 'production' }

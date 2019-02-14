@@ -5,7 +5,7 @@ const Card = props => {
   return (
     <div className="card">
       <h4 className="title">{title}</h4>
-      <p className="body"> {body}</p>
+      <div> className="body"> {body}</div>
       <div className="priority">Priority: {priority}</div>
       <div className="createdBy">Assigned by: {createdBy}</div>
       <button>Edit</button>

@@ -11,7 +11,6 @@ const Card = props => {
     onDeleteClick
   } = props;
 
-  console.log(props);
   const boundOnDeleteClick = onDeleteClick.bind(null, id);
 
   return (

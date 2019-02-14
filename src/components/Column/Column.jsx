@@ -9,7 +9,6 @@ const Column = props => {
       return card.status === columnName;
     })
     .map(card => {
-      console.log(card.key);
       return (
         <Card
           id={card.key}

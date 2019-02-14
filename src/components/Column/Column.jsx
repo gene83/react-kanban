@@ -4,7 +4,7 @@ import './Column.css';
 
 const Column = props => {
   const { columnName } = props;
-  const cardList = props.cardList
+  const cards = props.cards
     .filter(card => {
       return card.status === columnName;
     })
@@ -24,7 +24,7 @@ const Column = props => {
   return (
     <div className="column">
       <div className="columnName">{columnName}</div>
-      {cardList}
+      {cards}
     </div>
   );
 };

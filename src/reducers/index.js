@@ -1,4 +1,4 @@
-const cardList = [
+const cards = [
   {
     key: 1,
     title: 'finish react-redux',
@@ -28,7 +28,7 @@ const cardList = [
   }
 ];
 
-const cardReducer = (state = cardList, action) => {
+const cardReducer = (state = cards, action) => {
   switch (action.type) {
     default:
       return state;

@@ -3,13 +3,13 @@ import Column from '../Column';
 import './KanBanBoard.css';
 
 const KanbanBoard = props => {
-  const { cardList } = props;
+  const { cards } = props;
 
   return (
     <div className="board">
-      <Column cardList={cardList} columnName="In Queue" />
-      <Column cardList={cardList} columnName="In Progress" />
-      <Column cardList={cardList} columnName="Done" />
+      <Column cards={cards} columnName="In Queue" />
+      <Column cards={cards} columnName="In Progress" />
+      <Column cards={cards} columnName="Done" />
     </div>
   );
 };

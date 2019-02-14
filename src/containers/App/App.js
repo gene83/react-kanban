@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <KanbanBoard cardList={this.props.cardList} />
+        <KanbanBoard cards={this.props.cards} />
       </div>
     );
   }
@@ -15,7 +15,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    cardList: state
+    cards: state
   };
 };
 

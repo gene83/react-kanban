@@ -3,10 +3,10 @@ import Card from '../Card';
 import './Column.css';
 
 const Column = props => {
-  const { columnName } = props;
+  const { columnStatus } = props;
   const cards = props.cards
     .filter(card => {
-      return card.status === columnName;
+      return card.status === columnStatus;
     })
     .map(card => {
       return (
@@ -21,9 +21,25 @@ const Column = props => {
       );
     });
 
+  let columnTitle;
+
+  switch (columnStatus) {
+    case 'in_queue':
+      columnTitle = 'In Queue';
+      break;
+    case 'in_progress':
+      columnTitle = 'In Progress';
+      break;
+    case 'done':
+      columnTitle = 'Done';
+      break;
+    default:
+      columnTitle = columnStatus;
+  }
+
   return (
     <div className="column">
-      <div className="columnName">{columnName}</div>
+      <div className="columnTitle">{columnTitle}</div>
       {cards}
     </div>
   );

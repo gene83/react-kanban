@@ -6,7 +6,7 @@ const cards = [
     priority: 'blocker',
     createdBy: 'gene',
     assignedTo: 'gene',
-    status: 'In Queue'
+    status: 'in_queue'
   },
   {
     key: 2,
@@ -15,7 +15,7 @@ const cards = [
     priority: 'Low',
     createdBy: 'gene',
     assignedTo: 'gene',
-    status: 'In Progress'
+    status: 'in_progress'
   },
   {
     key: 3,
@@ -24,7 +24,7 @@ const cards = [
     priority: 'High',
     createdBy: 'gene',
     assignedTo: 'gene',
-    status: 'Done'
+    status: 'done'
   }
 ];
 

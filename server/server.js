@@ -49,7 +49,7 @@ passport.deserializeUser((user, done) => {
         id: dbUser.id,
         username: dbUser.username
       }).catch(err => {
-        console.log(err);
+        return done(err);
       });
     });
 });
@@ -75,7 +75,7 @@ passport.use(
         }
       })
       .catch(err => {
-        console.log(err);
+        return done(err);
       });
   })
 );

@@ -1,4 +1,9 @@
-import { DELETE_CARD, SHOW_ADD_MODAL } from '../actions';
+import {
+  DELETE_CARD,
+  SHOW_ADD_MODAL,
+  ADD_CARD,
+  HIDE_ADD_MODAL
+} from '../actions';
 
 const initialState = {
   newTaskModalDisplay: 'hidden',
@@ -33,18 +38,33 @@ const initialState = {
   ]
 };
 
+let id = 4;
+
 const cardReducer = (state = initialState, action) => {
   switch (action.type) {
     case DELETE_CARD:
-      const index = state.findIndex(card => card.key === action.key);
+      const index = state.cardList.findIndex(card => card.key === action.key);
       if (index === -1) {
         return state;
       }
-      return state.slice(0, index).concat(state.slice(index + 1));
+      return Object.assign({}, state, {
+        cardList: state.cardList
+          .slice(0, index)
+          .concat(state.cardList.slice(index + 1))
+      });
     case SHOW_ADD_MODAL:
-      console.log('hit');
       return Object.assign({}, state, {
         newTaskModalDisplay: 'Block'
+      });
+    case HIDE_ADD_MODAL:
+      return Object.assign({}, state, {
+        newTaskModalDisplay: 'hidden'
+      });
+    case ADD_CARD:
+      action.newCard.status = 'In Queue';
+      action.newCard.key = id++;
+      return Object.assign({}, state, {
+        cardList: [...state.cardList, action.newCard]
       });
     default:
       return state;

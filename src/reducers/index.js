@@ -1,3 +1,5 @@
+import { DELETE_CARD } from '../actions';
+
 const cardList = [
   {
     key: 1,
@@ -30,6 +32,12 @@ const cardList = [
 
 const cardReducer = (state = cardList, action) => {
   switch (action.type) {
+    case DELETE_CARD:
+      const index = state.findIndex(card => card.key === action.key);
+      if (index === -1) {
+        return state;
+      }
+      return state.slice(0, index).concat(state.slice(index + 1));
     default:
       return state;
   }

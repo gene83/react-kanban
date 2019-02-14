@@ -1,7 +1,7 @@
 const bookshelf = require('./bookshelf');
 
 class Card extends bookshelf.Model {
-  get teableName() {
+  get tableName() {
     return 'cards';
   }
   get hasTimestamps() {

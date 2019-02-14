@@ -1,7 +1,19 @@
 import React from 'react';
 
 const Card = props => {
-  const { title, body, priority, createdBy, assignedTo } = props;
+  const {
+    id,
+    title,
+    body,
+    priority,
+    createdBy,
+    assignedTo,
+    onDeleteClick
+  } = props;
+
+  console.log(props);
+  const boundOnDeleteClick = onDeleteClick.bind(null, id);
+
   return (
     <div className="card">
       <h4 className="title">{title}</h4>
@@ -9,7 +21,7 @@ const Card = props => {
       <div className="priority">Priority: {priority}</div>
       <div className="createdBy">Assigned by: {createdBy}</div>
       <button>Edit</button>
-      <button>Delete</button>
+      <button onClick={boundOnDeleteClick}>Delete</button>
       <div className="assignedTo">{assignedTo}</div>
     </div>
   );

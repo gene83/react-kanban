@@ -1,7 +1,7 @@
 const bookshelf = require('./bookshelf');
 
 class Priority extends bookshelf.Model {
-  get teableName() {
+  get tableName() {
     return 'priorities';
   }
   get hasTimestamps() {

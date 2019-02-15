@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <NewTaskModal newTaskModalDisplay={this.props.newTaskModalDisplay} />
+        <NewTaskModal />
 
         <Header onNewTaskClick={this.props.onNewTaskClick} />
 

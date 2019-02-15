@@ -102,7 +102,9 @@ class NewTaskModal extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    newTaskModalDisplay: state.newTaskModalDisplay
+  };
 };
 
 const mapDispatchToProps = dispatch => {

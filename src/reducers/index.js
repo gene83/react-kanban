@@ -1,12 +1,7 @@
-import {
-  DELETE_CARD,
-  SHOW_ADD_MODAL,
-  ADD_CARD,
-  HIDE_ADD_MODAL
-} from '../actions';
+import { DELETE_CARD, TOGGLE_ADD_MODAL, ADD_CARD } from '../actions';
 
 const initialState = {
-  newTaskModalDisplay: 'hidden',
+  showNewTaskModal: 'hidden',
   cardList: [
     {
       key: 1,
@@ -52,13 +47,9 @@ const cardReducer = (state = initialState, action) => {
           .slice(0, index)
           .concat(state.cardList.slice(index + 1))
       });
-    case SHOW_ADD_MODAL:
+    case TOGGLE_ADD_MODAL:
       return Object.assign({}, state, {
         newTaskModalDisplay: 'Block'
-      });
-    case HIDE_ADD_MODAL:
-      return Object.assign({}, state, {
-        newTaskModalDisplay: 'hidden'
       });
     case ADD_CARD:
       action.newCard.status = 'In Queue';

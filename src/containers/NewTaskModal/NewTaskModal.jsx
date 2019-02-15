@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './NewTaskModal.css';
-import { addCard, hideAddModal } from '../../actions';
+import { addCard } from '../../actions';
 
 class NewTaskModal extends Component {
   constructor(props) {
@@ -103,7 +103,7 @@ class NewTaskModal extends Component {
 
 const mapStateToProps = state => {
   return {
-    newTaskModalDisplay: state.newTaskModalDisplay
+    showNewTaskModal: state.showNewTaskModal
   };
 };
 
@@ -111,7 +111,6 @@ const mapDispatchToProps = dispatch => {
   return {
     onAdd: newCard => {
       dispatch(addCard(newCard));
-      dispatch(hideAddModal());
     }
   };
 };

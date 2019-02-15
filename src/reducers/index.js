@@ -80,8 +80,7 @@ const cardReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         cardList: state.cardList
           .slice(0, editIndex)
-          .concat(action.editedCard)
-          .concat(state.cardList.slice(editIndex + 1))
+          .concat(action.editedCard, state.cardList.slice(editIndex + 1))
       });
     default:
       return state;

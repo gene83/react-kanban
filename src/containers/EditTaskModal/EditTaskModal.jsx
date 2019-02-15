@@ -9,6 +9,7 @@ class EditTaskModal extends Component {
     this.state = {
       title: '',
       body: '',
+      status: '',
       priority: '',
       createdBy: '',
       assignedTo: ''
@@ -16,6 +17,7 @@ class EditTaskModal extends Component {
 
     this.handleTitleOnChange = this.handleTitleOnChange.bind(this);
     this.handleBodyOnChange = this.handleBodyOnChange.bind(this);
+    this.handleStatusOnChange = this.handleStatusOnChange.bind(this);
     this.handlePriorityOnChange = this.handlePriorityOnChange.bind(this);
     this.handleCreatedByOnChange = this.handleCreatedByOnChange.bind(this);
     this.handleAssignedToOnChange = this.handleAssignedToOnChange.bind(this);
@@ -44,6 +46,13 @@ class EditTaskModal extends Component {
     });
   }
 
+  handleStatusOnChange(e) {
+    const value = e.target.value;
+    this.setState({
+      status: value
+    });
+  }
+
   handlePriorityOnChange(e) {
     const value = e.target.value;
     this.setState({
@@ -68,13 +77,15 @@ class EditTaskModal extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const { title, body, priority, createdBy, assignedTo } = this.state;
+    console.log(this.state);
+    const { title, body, priority, createdBy, assignedTo, status } = this.state;
 
     this.props.onEdit({
       key: this.props.showEditTaskModal,
       title,
       body,
       priority,
+      status,
       createdBy,
       assignedTo
     });
@@ -107,6 +118,12 @@ class EditTaskModal extends Component {
             value={this.state.body}
             onChange={this.handleBodyOnChange}
           />
+          Status:
+          <select onChange={this.handleStatusOnChange}>
+            <option value="In Queue">In Queue</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Done">Done</option>
+          </select>
           Priority:
           <select onChange={this.handlePriorityOnChange}>
             <option value="" />

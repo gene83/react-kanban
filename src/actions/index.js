@@ -9,10 +9,9 @@ export const deleteCard = key => {
   };
 };
 
-export const showAddModal = () => {
+export const toggleAddModal = () => {
   return {
-    type: TOGGLE_ADD_MODAL,
-    display: 'block'
+    type: TOGGLE_ADD_MODAL
   };
 };
 

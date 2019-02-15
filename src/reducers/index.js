@@ -1,7 +1,7 @@
 import { DELETE_CARD, TOGGLE_ADD_MODAL, ADD_CARD } from '../actions';
 
 const initialState = {
-  showNewTaskModal: 'hidden',
+  showNewTaskModal: false,
   cardList: [
     {
       key: 1,
@@ -49,7 +49,7 @@ const cardReducer = (state = initialState, action) => {
       });
     case TOGGLE_ADD_MODAL:
       return Object.assign({}, state, {
-        newTaskModalDisplay: 'Block'
+        showNewTaskModal: !state.showNewTaskModal
       });
     case ADD_CARD:
       action.newCard.status = 'In Queue';

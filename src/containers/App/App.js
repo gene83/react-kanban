@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 import NewTaskModal from '../NewTaskModal';
 import './App.css';
 
-import { deleteCard, showAddModal } from '../../actions';
+import { deleteCard, toggleAddModal } from '../../actions';
 
 class App extends Component {
   render() {
@@ -38,7 +38,7 @@ const mapDispatchToProps = dispatch => {
     },
 
     onNewTaskClick: () => {
-      dispatch(showAddModal());
+      dispatch(toggleAddModal());
     }
   };
 };

@@ -14,11 +14,20 @@ class NewTaskModal extends Component {
       assignedTo: ''
     };
 
+    this.makeModalClassname = this.makeModalClassname.bind(this);
     this.handleTitleOnChange = this.handleTitleOnChange.bind(this);
     this.handlePriorityOnChange = this.handlePriorityOnChange.bind(this);
     this.handleCreatedByOnChange = this.handleCreatedByOnChange.bind(this);
     this.handleAssignedToOnChange = this.handleAssignedToOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  makeModalClassname(show) {
+    if (show) {
+      return 'modal show-modal';
+    }
+
+    return 'modal hide-modal';
   }
 
   handleTitleOnChange(e) {
@@ -66,7 +75,7 @@ class NewTaskModal extends Component {
 
   render() {
     return (
-      <div className={this.props.newTaskModalDisplay}>
+      <div className={this.makeModalClassname(this.props.showNewTaskModal)}>
         <form>
           Title:
           <input

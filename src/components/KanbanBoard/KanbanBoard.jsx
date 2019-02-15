@@ -3,25 +3,21 @@ import Column from '../Column';
 import './KanBanBoard.css';
 
 const KanbanBoard = props => {
-  const { cardList, onDeleteClick } = props;
+  const { cards, onDeleteClick } = props;
 
   return (
     <div className="board">
       <Column
-        cardList={cardList}
+        cards={cards}
         onDeleteClick={onDeleteClick}
-        columnName="In Queue"
+        columnStatus="In Queue"
       />
       <Column
-        cardList={cardList}
+        cards={cards}
         onDeleteClick={onDeleteClick}
-        columnName="In Progress"
+        columnStatus="In Progress"
       />
-      <Column
-        cardList={cardList}
-        onDeleteClick={onDeleteClick}
-        columnName="Done"
-      />
+      <Column cards={cards} onDeleteClick={onDeleteClick} columnStatus="Done" />
     </div>
   );
 };

@@ -13,13 +13,17 @@ const PORT = process.env.PORT || 8080;
 const ENV = process.env.NODE_ENV || 'development';
 const SESSION_SECRET = process.env.SESSION_SECRET || 'kabob';
 
+if (!process.env.REDIS_STORE_URI) {
+  throw new Error('redis store uri not set');
+}
+
 const app = express();
 
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(
   session({
-    store: new redis({ url: 'redis://redis-server:6379', logErrors: true }),
+    store: new redis({ url: process.env.REDIS_STORE_URI, logErrors: true }),
     secret: SESSION_SECRET,
     resave: false,
     cookie: { secure: ENV === 'production' }
@@ -45,7 +49,7 @@ passport.deserializeUser((user, done) => {
         id: dbUser.id,
         username: dbUser.username
       }).catch(err => {
-        console.log(err);
+        return done(err);
       });
     });
 });
@@ -71,7 +75,7 @@ passport.use(
         }
       })
       .catch(err => {
-        console.log(err);
+        return done(err);
       });
   })
 );

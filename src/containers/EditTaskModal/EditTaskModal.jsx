@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { hideEditModal } from '../../actions';
+import { hideEditModal, editCard } from '../../actions';
 
 class EditTaskModal extends Component {
   constructor(props) {
@@ -70,6 +70,15 @@ class EditTaskModal extends Component {
 
     const { title, body, priority, createdBy, assignedTo } = this.state;
 
+    this.props.onEdit({
+      key: this.props.showEditTaskModal,
+      title,
+      body,
+      priority,
+      createdBy,
+      assignedTo
+    });
+
     this.setState({
       title: '',
       body: '',
@@ -135,6 +144,9 @@ const mapDispatchToProps = dispatch => {
   return {
     closeModal: () => {
       dispatch(hideEditModal());
+    },
+    onEdit: editedCard => {
+      dispatch(editCard(editedCard));
     }
   };
 };

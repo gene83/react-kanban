@@ -3,6 +3,7 @@ export const TOGGLE_ADD_MODAL = 'TOGGLE_ADD_MODAL';
 export const ADD_CARD = 'ADD_CARD';
 export const SHOW_EDIT_MODAL = 'SHOW_EDIT_MODAL';
 export const HIDE_EDIT_MODAL = 'HIDE_EDIT_MODAL';
+export const EDIT_CARD = 'EDIT_CARD';
 
 export const deleteCard = key => {
   return {
@@ -34,5 +35,12 @@ export const showEditModal = id => {
 export const hideEditModal = () => {
   return {
     type: HIDE_EDIT_MODAL
+  };
+};
+
+export const editCard = editedCard => {
+  return {
+    type: EDIT_CARD,
+    editedCard: editedCard
   };
 };

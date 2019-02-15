@@ -3,7 +3,8 @@ import {
   TOGGLE_ADD_MODAL,
   ADD_CARD,
   SHOW_EDIT_MODAL,
-  HIDE_EDIT_MODAL
+  HIDE_EDIT_MODAL,
+  EDIT_CARD
 } from '../actions';
 
 const initialState = {
@@ -71,6 +72,16 @@ const cardReducer = (state = initialState, action) => {
     case HIDE_EDIT_MODAL:
       return Object.assign({}, state, {
         showEditTaskModal: false
+      });
+    case EDIT_CARD:
+      const editIndex = state.cardList.findIndex(
+        card => card.key === action.editedCard.key
+      );
+      return Object.assign({}, state, {
+        cardList: state.cardList
+          .slice(0, editIndex)
+          .concat(action.editedCard)
+          .concat(state.cardList.slice(editIndex + 1))
       });
     default:
       return state;

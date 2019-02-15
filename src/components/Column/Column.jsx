@@ -3,7 +3,7 @@ import Card from '../Card';
 import './Column.css';
 
 const Column = props => {
-  const { columnStatus } = props;
+  const { columnStatus, onDeleteClick } = props;
   const cards = props.cards
     .filter(card => {
       return card.status === columnStatus;
@@ -11,12 +11,13 @@ const Column = props => {
     .map(card => {
       return (
         <Card
-          key={card.id}
+          id={card.key}
           title={card.title}
           body={card.body}
           priority={card.priority}
           createdBy={card.createdBy}
           assignedTo={card.assignedTo}
+          onDeleteClick={onDeleteClick}
         />
       );
     });

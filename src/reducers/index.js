@@ -18,7 +18,7 @@ const initialState = {
       priority: 'blocker',
       createdBy: 'gene',
       assignedTo: 'gene',
-      status: 'In Queue'
+      status: 'in_queue'
     },
     {
       key: 2,
@@ -27,7 +27,7 @@ const initialState = {
       priority: 'Low',
       createdBy: 'gene',
       assignedTo: 'gene',
-      status: 'In Progress'
+      status: 'in_progress'
     },
     {
       key: 3,
@@ -36,7 +36,7 @@ const initialState = {
       priority: 'High',
       createdBy: 'gene',
       assignedTo: 'gene',
-      status: 'Done'
+      status: 'done'
     }
   ]
 };

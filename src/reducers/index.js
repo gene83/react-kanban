@@ -10,7 +10,7 @@ import {
 const initialState = {
   showNewTaskModal: false,
   showEditTaskModal: false,
-  cardList: [
+  cards: [
     {
       key: 1,
       title: 'finish react-redux',
@@ -46,14 +46,12 @@ let id = 4;
 const cardReducer = (state = initialState, action) => {
   switch (action.type) {
     case DELETE_CARD:
-      const index = state.cardList.findIndex(card => card.key === action.key);
+      const index = state.cards.findIndex(card => card.key === action.key);
       if (index === -1) {
         return state;
       }
       return Object.assign({}, state, {
-        cardList: state.cardList
-          .slice(0, index)
-          .concat(state.cardList.slice(index + 1))
+        cards: state.cards.slice(0, index).concat(state.cards.slice(index + 1))
       });
     case TOGGLE_ADD_MODAL:
       return Object.assign({}, state, {
@@ -63,7 +61,7 @@ const cardReducer = (state = initialState, action) => {
       action.newCard.status = 'In Queue';
       action.newCard.key = id++;
       return Object.assign({}, state, {
-        cardList: [...state.cardList, action.newCard]
+        cards: [...state.cards, action.newCard]
       });
     case SHOW_EDIT_MODAL:
       return Object.assign({}, state, {

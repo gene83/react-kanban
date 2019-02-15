@@ -18,7 +18,7 @@ class App extends Component {
         <Header onNewTaskClick={this.props.onNewTaskClick} />
 
         <KanbanBoard
-          cardList={this.props.cardList}
+          cards={this.props.cards}
           onDeleteClick={this.props.onDeleteClick}
           onEditClick={this.props.onEditClick}
         />
@@ -29,7 +29,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    cardList: state.cardList,
+    cards: state.cards,
     newTaskModalDisplay: state.newTaskModalDisplay
   };
 };

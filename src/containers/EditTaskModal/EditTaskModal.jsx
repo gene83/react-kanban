@@ -77,7 +77,6 @@ class EditTaskModal extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    console.log(this.state);
     const { title, body, priority, createdBy, assignedTo, status } = this.state;
 
     this.props.onEdit({

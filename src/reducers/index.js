@@ -1,7 +1,14 @@
-import { DELETE_CARD, TOGGLE_ADD_MODAL, ADD_CARD } from '../actions';
+import {
+  DELETE_CARD,
+  TOGGLE_ADD_MODAL,
+  ADD_CARD,
+  SHOW_EDIT_MODAL,
+  HIDE_EDIT_MODAL
+} from '../actions';
 
 const initialState = {
   showNewTaskModal: false,
+  showEditTaskModal: false,
   cardList: [
     {
       key: 1,
@@ -56,6 +63,14 @@ const cardReducer = (state = initialState, action) => {
       action.newCard.key = id++;
       return Object.assign({}, state, {
         cardList: [...state.cardList, action.newCard]
+      });
+    case SHOW_EDIT_MODAL:
+      return Object.assign({}, state, {
+        showEditTaskModal: action.id
+      });
+    case HIDE_EDIT_MODAL:
+      return Object.assign({}, state, {
+        showEditTaskModal: false
       });
     default:
       return state;

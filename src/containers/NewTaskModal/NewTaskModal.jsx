@@ -14,7 +14,6 @@ class NewTaskModal extends Component {
       assignedTo: ''
     };
 
-    this.makeModalClassname = this.makeModalClassname.bind(this);
     this.handleTitleOnChange = this.handleTitleOnChange.bind(this);
     this.handlePriorityOnChange = this.handlePriorityOnChange.bind(this);
     this.handleCreatedByOnChange = this.handleCreatedByOnChange.bind(this);

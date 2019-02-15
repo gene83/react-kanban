@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { hideEditModal } from '../../actions';
 
 class EditTaskModal extends Component {
   constructor(props) {
@@ -18,6 +20,14 @@ class EditTaskModal extends Component {
     this.handleCreatedByOnChange = this.handleCreatedByOnChange.bind(this);
     this.handleAssignedToOnChange = this.handleAssignedToOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  makeModalClassName(show) {
+    if (show) {
+      return 'edit-modal show-modal';
+    }
+
+    return 'edit-modal hide-modal';
   }
 
   handleTitleOnChange(e) {
@@ -67,11 +77,14 @@ class EditTaskModal extends Component {
       createdBy: '',
       assignedTo: ''
     });
+
+    this.props.closeModal();
   }
 
   render() {
     return (
-      <div>
+      <div className={this.makeModalClassName(this.props.showEditTaskModal)}>
+        Edit Task: {this.props.showEditTaskModal}
         <form>
           Title:
           <input
@@ -111,5 +124,24 @@ class EditTaskModal extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    showEditTaskModal: state.showEditTaskModal
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    closeModal: () => {
+      dispatch(hideEditModal());
+    }
+  };
+};
+
+EditTaskModal = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditTaskModal);
 
 export default EditTaskModal;

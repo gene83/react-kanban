@@ -8,10 +8,12 @@ const Card = props => {
     priority,
     createdBy,
     assignedTo,
-    onDeleteClick
+    onDeleteClick,
+    onEditClick
   } = props;
 
   const boundOnDeleteClick = onDeleteClick.bind(null, id);
+  const boundOnEditClick = onEditClick.bind(null, id);
 
   return (
     <div className="card">
@@ -19,7 +21,7 @@ const Card = props => {
       <p className="body"> {body}</p>
       <div className="priority">Priority: {priority}</div>
       <div className="createdBy">Assigned by: {createdBy}</div>
-      <button>Edit</button>
+      <button onClick={boundOnEditClick}>Edit</button>
       <button onClick={boundOnDeleteClick}>Delete</button>
       <div className="assignedTo">{assignedTo}</div>
     </div>

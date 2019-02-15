@@ -72,13 +72,13 @@ const cardReducer = (state = initialState, action) => {
         showEditTaskModal: false
       });
     case EDIT_CARD:
-      const editIndex = state.cardList.findIndex(
+      const editIndex = state.cards.findIndex(
         card => card.key === action.editedCard.key
       );
       return Object.assign({}, state, {
-        cardList: state.cardList
+        cards: state.cards
           .slice(0, editIndex)
-          .concat(action.editedCard, state.cardList.slice(editIndex + 1))
+          .concat(action.editedCard, state.cards.slice(editIndex + 1))
       });
     default:
       return state;

@@ -119,9 +119,9 @@ class EditTaskModal extends Component {
           />
           Status:
           <select onChange={this.handleStatusOnChange}>
-            <option value="In Queue">In Queue</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Done">Done</option>
+            <option value="in_queue">In Queue</option>
+            <option value="in_progress">In Progress</option>
+            <option value="done">Done</option>
           </select>
           Priority:
           <select onChange={this.handlePriorityOnChange}>

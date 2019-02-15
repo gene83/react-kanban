@@ -4,7 +4,6 @@ import './Column.css';
 
 const Column = props => {
   const { columnStatus, onDeleteClick, onEditClick } = props;
-
   const cards = props.cards
     .filter(card => {
       return card.status === columnStatus;

@@ -11,19 +11,19 @@ const KanbanBoard = props => {
         cards={cards}
         onDeleteClick={onDeleteClick}
         onEditClick={onEditClick}
-        columnStatus="in_queue"
+        columnStatus="1"
       />
       <Column
         cards={cards}
         onDeleteClick={onDeleteClick}
         onEditClick={onEditClick}
-        columnStatus="in_progress"
+        columnStatus="2"
       />
       <Column
         cards={cards}
         onEditClick={onEditClick}
         onDeleteClick={onDeleteClick}
-        columnStatus="done"
+        columnStatus="3"
       />
     </div>
   );

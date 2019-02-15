@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './NewTaskModal.css';
-import { addCard } from '../../actions';
+import { addCard, toggleAddModal } from '../../actions';
 
 class NewTaskModal extends Component {
   constructor(props) {
@@ -71,6 +71,8 @@ class NewTaskModal extends Component {
       createdBy: '',
       assignedTo: ''
     });
+
+    this.props.closeModal();
   }
 
   render() {
@@ -120,6 +122,10 @@ const mapDispatchToProps = dispatch => {
   return {
     onAdd: newCard => {
       dispatch(addCard(newCard));
+    },
+
+    closeModal: () => {
+      dispatch(toggleAddModal());
     }
   };
 };

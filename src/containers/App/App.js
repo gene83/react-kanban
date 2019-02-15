@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import KanbanBoard from '../../components/KanbanBoard';
 import Header from '../../components/Header';
 import NewTaskModal from '../NewTaskModal';
+import EditTaskModal from '../EditTaskModal';
 import './App.css';
 
 import { deleteCard, toggleAddModal } from '../../actions';
@@ -12,6 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <NewTaskModal />
+        <EditTaskModal />
 
         <Header onNewTaskClick={this.props.onNewTaskClick} />
 

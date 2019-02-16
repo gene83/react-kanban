@@ -12,6 +12,14 @@ class RegisterModal extends Component {
     };
   }
 
+  makeModalClassName(show) {
+    if (show) {
+      return 'register-modal show-modal';
+    }
+
+    return 'register-modal hide-modal';
+  }
+
   handleFirstNameOnChange(e) {
     const value = e.target.value;
     this.setState({
@@ -39,7 +47,7 @@ class RegisterModal extends Component {
 
   render() {
     return (
-      <div className="register-modal">
+      <div className={this.makeModalClassName(this.props.show)}>
         <form>
           First Name:
           <input
@@ -67,7 +75,9 @@ class RegisterModal extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    show: state.showRegisterModal
+  };
 };
 
 const mapDispatchToProps = dispatch => {

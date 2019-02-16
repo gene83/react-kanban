@@ -98,6 +98,16 @@ app.post('/cards', (req, res) => {
     });
 });
 
+app.get('/cards', (req, res) => {
+  Card.fetchAll()
+    .then(cards => {
+      res.json(cards);
+    })
+    .catch(err => {
+      res.send(err);
+    });
+});
+
 app.use(express.static('public'));
 
 app.listen(PORT, () => {

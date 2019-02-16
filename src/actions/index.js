@@ -148,7 +148,6 @@ export const loginUser = user => {
         'content-type': 'application/json'
       }
     }).then(res => {
-      console.log(res);
       if (res.status === 401) {
         return;
       }

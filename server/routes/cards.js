@@ -29,14 +29,15 @@ router.get('/', (req, res) => {
     });
 });
 
-router.put('/', (req, res) => {
+router.put('/:id', (req, res) => {
   const editedCard = req.body;
+  const id = req.params.id;
 
   //null for now, havent integrated users yet
   editedCard.created_by = null;
   editedCard.assigned_to = null;
 
-  Card.where('id', editedCard.id)
+  Card.where('id', id)
     .fetch()
     .then(card => {
       card
@@ -50,8 +51,8 @@ router.put('/', (req, res) => {
     });
 });
 
-router.delete('/', (req, res) => {
-  const id = req.body.id;
+router.delete('/:id', (req, res) => {
+  const id = req.params.id;
 
   Card.where('id', id)
     .destroy()

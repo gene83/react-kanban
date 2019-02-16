@@ -80,7 +80,7 @@ class EditTaskModal extends Component {
     const { title, body, priority, createdBy, assignedTo, status } = this.state;
 
     this.props.onEdit({
-      key: this.props.showEditTaskModal,
+      key: this.props.editModalTaskId,
       title,
       body,
       priority,
@@ -102,8 +102,8 @@ class EditTaskModal extends Component {
 
   render() {
     return (
-      <div className={this.makeModalClassName(this.props.showEditTaskModal)}>
-        Edit Task: {this.props.showEditTaskModal}
+      <div className={this.makeModalClassName(this.props.editModalTaskId)}>
+        Edit Task: {this.props.editModalTaskId}
         <form>
           Title:
           <input
@@ -152,7 +152,7 @@ class EditTaskModal extends Component {
 
 const mapStateToProps = state => {
   return {
-    showEditTaskModal: state.showEditTaskModal
+    editModalTaskId: state.editModalTaskId
   };
 };
 

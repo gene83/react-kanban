@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   showNewTaskModal: false,
-  showEditTaskModal: false,
+  editModalTaskId: 0,
   cards: [
     {
       key: 1,
@@ -65,11 +65,11 @@ const cardReducer = (state = initialState, action) => {
       });
     case SHOW_EDIT_MODAL:
       return Object.assign({}, state, {
-        showEditTaskModal: action.id
+        editModalTaskId: action.id
       });
     case HIDE_EDIT_MODAL:
       return Object.assign({}, state, {
-        showEditTaskModal: false
+        editModalTaskId: 0
       });
     case EDIT_CARD:
       const editIndex = state.cards.findIndex(

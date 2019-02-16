@@ -6,7 +6,7 @@ import NewTaskModal from '../NewTaskModal';
 import EditTaskModal from '../EditTaskModal';
 import './App.css';
 
-import { deleteCard, toggleAddModal, showEditModal } from '../../actions';
+import { toggleAddModal } from '../../actions';
 
 class App extends Component {
   render() {
@@ -17,11 +17,7 @@ class App extends Component {
 
         <Header onNewTaskClick={this.props.onNewTaskClick} />
 
-        <KanbanBoard
-          cards={this.props.cards}
-          onDeleteClick={this.props.onDeleteClick}
-          onEditClick={this.props.onEditClick}
-        />
+        <KanbanBoard cards={this.props.cards} />
       </div>
     );
   }
@@ -36,16 +32,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onDeleteClick: id => {
-      dispatch(deleteCard(id));
-    },
-
     onNewTaskClick: () => {
       dispatch(toggleAddModal());
-    },
-
-    onEditClick: id => {
-      dispatch(showEditModal(id));
     }
   };
 };

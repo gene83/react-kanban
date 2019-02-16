@@ -170,7 +170,6 @@ app.post('/register', (req, res) => {
           res.send('Account created successfully');
         })
         .catch(err => {
-          console.log(err);
           res.send(err);
         });
     });

@@ -129,6 +129,19 @@ app.put('/cards', (req, res) => {
     });
 });
 
+app.delete('/cards', (req, res) => {
+  const id = req.body.id;
+
+  Card.where('id', id)
+    .destroy()
+    .then(() => {
+      res.send('card deleted succesfully');
+    })
+    .catch(err => {
+      res.send(err);
+    });
+});
+
 app.use(express.static('public'));
 
 app.listen(PORT, () => {

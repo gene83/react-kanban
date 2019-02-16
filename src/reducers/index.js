@@ -19,7 +19,7 @@ let id = 4;
 const cardReducer = (state = initialState, action) => {
   switch (action.type) {
     case DELETE_CARD:
-      const index = state.cards.findIndex(card => card.key === action.key);
+      const index = state.cards.findIndex(card => card.id === action.id);
       if (index === -1) {
         return state;
       }

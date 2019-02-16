@@ -6,10 +6,20 @@ export const HIDE_EDIT_MODAL = 'HIDE_EDIT_MODAL';
 export const EDIT_CARD = 'EDIT_CARD';
 export const LOAD_CARDS = 'LOAD_CARDS';
 
-export const deleteCard = key => {
-  return {
-    type: DELETE_CARD,
-    key: key
+export const deleteCard = id => {
+  return dispatch => {
+    return fetch('/cards', {
+      method: 'DELETE',
+      body: JSON.stringify({ id: id }),
+      headers: {
+        'content-type': 'application/json'
+      }
+    }).then(() => {
+      return dispatch({
+        type: DELETE_CARD,
+        id: id
+      });
+    });
   };
 };
 

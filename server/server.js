@@ -6,6 +6,7 @@ const localStrategy = require('passport-local');
 const bcrypt = require('bcryptjs');
 const redis = require('connect-redis')(session);
 const flash = require('connect-flash');
+const saltRounds = 12;
 
 const User = require('../database/models/User');
 const Card = require('../database/models/Card');
@@ -140,6 +141,40 @@ app.delete('/cards', (req, res) => {
     .catch(err => {
       res.send(err);
     });
+});
+
+app.post('/register', (req, res) => {
+  const newUser = req.body;
+
+  bcrypt.genSalt(saltRounds, (err, salt) => {
+    if (err) {
+      res.writeHead(500);
+      return res.send('Error Creating Account');
+    }
+
+    bcrypt.hash(newUser.password, salt, (err, hash) => {
+      if (err) {
+        res.writeHead(500);
+        return res.send('Error creating account');
+      }
+
+      return new User({
+        username: newUser.username,
+        password: hash,
+        first_name: newUser.first_name,
+        last_name: newUser.last_name,
+        email: newUser.email
+      })
+        .save()
+        .then(() => {
+          res.send('Account created successfully');
+        })
+        .catch(err => {
+          console.log(err);
+          res.send(err);
+        });
+    });
+  });
 });
 
 app.use(express.static('public'));

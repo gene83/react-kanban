@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { registerUser } from '../../actions';
+import { registerUser, toggleRegisterModal } from '../../actions';
 
 class RegisterModal extends Component {
   constructor(props) {
@@ -87,6 +87,8 @@ class RegisterModal extends Component {
       username: '',
       password: ''
     });
+
+    this.props.closeModal();
   }
 
   render() {
@@ -140,6 +142,10 @@ const mapDispatchToProps = dispatch => {
   return {
     registerUser: user => {
       dispatch(registerUser(user));
+    },
+
+    closeModal: () => {
+      dispatch(toggleRegisterModal());
     }
   };
 };

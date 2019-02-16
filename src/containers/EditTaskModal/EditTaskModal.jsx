@@ -9,10 +9,10 @@ class EditTaskModal extends Component {
     this.state = {
       title: '',
       body: '',
-      status: '',
-      priority: '',
-      createdBy: '',
-      assignedTo: ''
+      status_id: '',
+      priority_id: '',
+      created_by: '',
+      assigned_to: ''
     };
 
     this.handleTitleOnChange = this.handleTitleOnChange.bind(this);
@@ -49,52 +49,59 @@ class EditTaskModal extends Component {
   handleStatusOnChange(e) {
     const value = e.target.value;
     this.setState({
-      status: value
+      status_id: value
     });
   }
 
   handlePriorityOnChange(e) {
     const value = e.target.value;
     this.setState({
-      priority: value
+      priority_id: value
     });
   }
 
   handleCreatedByOnChange(e) {
     const value = e.target.value;
     this.setState({
-      createdBy: value
+      created_by: value
     });
   }
 
   handleAssignedToOnChange(e) {
     const value = e.target.value;
     this.setState({
-      assignedTo: value
+      assigned_to: value
     });
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
-    const { title, body, priority, createdBy, assignedTo, status } = this.state;
+    const {
+      title,
+      body,
+      priority_id,
+      created_by,
+      assigned_to,
+      status_id
+    } = this.state;
 
     this.props.onEdit({
       id: this.props.editModalTaskId,
       title,
       body,
-      priority_id: parseInt(priority),
-      status_id: parseInt(status),
-      createdBy,
-      assignedTo
+      priority_id: parseInt(priority_id),
+      status_id: parseInt(status_id),
+      created_by: parseInt(created_by),
+      assigned_to: parseInt(assigned_to)
     });
 
     this.setState({
       title: '',
       body: '',
-      priority: '',
-      createdBy: '',
-      assignedTo: ''
+      priority_id: '',
+      created_by: '',
+      assigned_to: ''
     });
 
     this.props.closeModal();
@@ -134,13 +141,13 @@ class EditTaskModal extends Component {
           CreatedBy:
           <input
             type="text"
-            value={this.state.createdBy}
+            value={this.state.created_by}
             onChange={this.handleCreatedByOnChange}
           />
           Assigned To:
           <input
             type="text"
-            value={this.state.assignedTo}
+            value={this.state.assigned_to}
             onChange={this.handleAssignedToOnChange}
           />
           <button onClick={this.handleSubmit}>Edit Task</button>

@@ -46,7 +46,7 @@ const cardReducer = (state = initialState, action) => {
       });
     case EDIT_CARD:
       const editIndex = state.cards.findIndex(
-        card => card.key === action.editedCard.key
+        card => card.id === action.editedCard.id
       );
       return Object.assign({}, state, {
         cards: state.cards

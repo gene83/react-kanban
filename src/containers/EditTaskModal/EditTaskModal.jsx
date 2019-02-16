@@ -80,11 +80,11 @@ class EditTaskModal extends Component {
     const { title, body, priority, createdBy, assignedTo, status } = this.state;
 
     this.props.onEdit({
-      key: this.props.editModalTaskId,
+      id: this.props.editModalTaskId,
       title,
       body,
-      priority,
-      status,
+      priority_id: parseInt(priority),
+      status_id: parseInt(status),
       createdBy,
       assignedTo
     });

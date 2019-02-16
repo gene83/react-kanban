@@ -4,6 +4,7 @@ export const ADD_CARD = 'ADD_CARD';
 export const SHOW_EDIT_MODAL = 'SHOW_EDIT_MODAL';
 export const HIDE_EDIT_MODAL = 'HIDE_EDIT_MODAL';
 export const EDIT_CARD = 'EDIT_CARD';
+export const LOAD_CARDS = 'LOAD_CARDS';
 
 export const deleteCard = key => {
   return {
@@ -56,5 +57,20 @@ export const editCard = editedCard => {
   return {
     type: EDIT_CARD,
     editedCard: editedCard
+  };
+};
+
+export const loadCards = cards => {
+  return dispatch => {
+    return fetch('/cards')
+      .then(response => {
+        return response.json();
+      })
+      .then(cards => {
+        return dispatch({
+          type: LOAD_CARDS,
+          cards: cards
+        });
+      });
   };
 };

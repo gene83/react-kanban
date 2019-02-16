@@ -6,9 +6,13 @@ import NewTaskModal from '../NewTaskModal';
 import EditTaskModal from '../EditTaskModal';
 import './App.css';
 
-import { toggleAddModal } from '../../actions';
+import { toggleAddModal, loadCards } from '../../actions';
 
 class App extends Component {
+  componentDidMount() {
+    return this.props.loadCards();
+  }
+
   render() {
     return (
       <div className="App">
@@ -34,6 +38,10 @@ const mapDispatchToProps = dispatch => {
   return {
     onNewTaskClick: () => {
       dispatch(toggleAddModal());
+    },
+
+    loadCards: () => {
+      dispatch(loadCards());
     }
   };
 };

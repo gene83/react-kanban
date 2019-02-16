@@ -4,41 +4,14 @@ import {
   ADD_CARD,
   SHOW_EDIT_MODAL,
   HIDE_EDIT_MODAL,
-  EDIT_CARD
+  EDIT_CARD,
+  LOAD_CARDS
 } from '../actions';
 
 const initialState = {
   showNewTaskModal: false,
   editModalTaskId: 0,
-  cards: [
-    {
-      key: 1,
-      title: 'finish react-redux',
-      body: '',
-      priority: '4',
-      createdBy: 'gene',
-      assignedTo: 'gene',
-      status: '1'
-    },
-    {
-      key: 2,
-      title: 'finish react-redux',
-      body: '',
-      priority: '1',
-      createdBy: 'gene',
-      assignedTo: 'gene',
-      status: '2'
-    },
-    {
-      key: 3,
-      title: 'finish react-redux',
-      body: '',
-      priority: '3',
-      createdBy: 'gene',
-      assignedTo: 'gene',
-      status: '3'
-    }
-  ]
+  cards: []
 };
 
 let id = 4;
@@ -79,6 +52,10 @@ const cardReducer = (state = initialState, action) => {
         cards: state.cards
           .slice(0, editIndex)
           .concat(action.editedCard, state.cards.slice(editIndex + 1))
+      });
+    case LOAD_CARDS:
+      return Object.assign({}, state, {
+        cards: action.cards
       });
     default:
       return state;

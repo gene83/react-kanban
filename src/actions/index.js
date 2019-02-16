@@ -7,6 +7,7 @@ export const EDIT_CARD = 'EDIT_CARD';
 export const LOAD_CARDS = 'LOAD_CARDS';
 export const TOGGLE_REGISTER_MODAL = 'TOGGLE_REGISTER_MODAL';
 export const REGISTER_USER = 'REGISTER_USER';
+export const TOGGLE_LOGIN_MODAL = 'TOGGLE_LOGIN_MODAL';
 
 export const deleteCard = id => {
   return dispatch => {
@@ -128,5 +129,11 @@ export const registerUser = user => {
         user: newReduxStoreUser
       });
     });
+  };
+};
+
+export const toggleLoginModal = () => {
+  return {
+    type: TOGGLE_LOGIN_MODAL
   };
 };

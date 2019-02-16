@@ -8,7 +8,12 @@ import RegisterModal from '../RegisterModal';
 import LoginModal from '../LoginModal/LoginModal';
 import './App.css';
 
-import { toggleAddModal, loadCards, toggleRegisterModal } from '../../actions';
+import {
+  toggleAddModal,
+  loadCards,
+  toggleRegisterModal,
+  toggleLoginModal
+} from '../../actions';
 
 class App extends Component {
   componentDidMount() {
@@ -26,6 +31,7 @@ class App extends Component {
         <Header
           onNewTaskClick={this.props.onNewTaskClick}
           onRegisterClick={this.props.onRegisterClick}
+          onLoginClick={this.props.onLoginClick}
         />
 
         <KanbanBoard cards={this.props.cards} />
@@ -53,6 +59,10 @@ const mapDispatchToProps = dispatch => {
 
     onRegisterClick: () => {
       dispatch(toggleRegisterModal());
+    },
+
+    onLoginClick: () => {
+      dispatch(toggleLoginModal());
     }
   };
 };

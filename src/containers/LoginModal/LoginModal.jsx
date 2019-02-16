@@ -12,6 +12,15 @@ class LoginModal extends Component {
 
     this.handleUsernameOnChange = this.handleUsernameOnChange.bind(this);
     this.handlePasswordOnChange = this.handlePasswordOnChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  makeModalClassName(show) {
+    if (show) {
+      return 'login-modal show-modal';
+    }
+
+    return 'login-modal hide-modal';
   }
 
   handleUsernameOnChange(e) {
@@ -34,7 +43,7 @@ class LoginModal extends Component {
 
   render() {
     return (
-      <div>
+      <div className={this.makeModalClassName(this.props.show)}>
         <form>
           Username:
           <input
@@ -54,5 +63,20 @@ class LoginModal extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    show: state.showLoginModal
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+LoginModal = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginModal);
 
 export default LoginModal;

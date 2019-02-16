@@ -1,9 +1,9 @@
 import React from 'react';
-import Card from '../Card';
+import Card from '../../containers/Card';
 import './Column.css';
 
 const Column = props => {
-  const { columnStatus, onDeleteClick, onEditClick } = props;
+  const { columnStatus } = props;
   const cards = props.cards
     .filter(card => {
       return card.status === columnStatus;
@@ -17,8 +17,6 @@ const Column = props => {
           priority={card.priority}
           createdBy={card.createdBy}
           assignedTo={card.assignedTo}
-          onDeleteClick={onDeleteClick}
-          onEditClick={onEditClick}
         />
       );
     });

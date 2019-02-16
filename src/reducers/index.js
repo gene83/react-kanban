@@ -6,14 +6,16 @@ import {
   HIDE_EDIT_MODAL,
   EDIT_CARD,
   LOAD_CARDS,
-  TOGGLE_REGISTER_MODAL
+  TOGGLE_REGISTER_MODAL,
+  REGISTER_USER
 } from '../actions';
 
 const initialState = {
   showNewTaskModal: false,
   editModalTaskId: 0,
   showRegisterModal: false,
-  cards: []
+  cards: [],
+  users: []
 };
 
 let id = 4;
@@ -62,6 +64,10 @@ const cardReducer = (state = initialState, action) => {
     case TOGGLE_REGISTER_MODAL:
       return Object.assign({}, state, {
         showRegisterModal: !state.showRegisterModal
+      });
+    case REGISTER_USER:
+      return Object.assign({}, state, {
+        users: state.users.concat(action.user)
       });
     default:
       return state;

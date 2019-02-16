@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { registerUser } from '../../actions';
 
 class RegisterModal extends Component {
   constructor(props) {
@@ -10,6 +11,11 @@ class RegisterModal extends Component {
       last_name: '',
       email: ''
     };
+
+    this.handleEmailOnChange = this.handleEmailOnChange.bind(this);
+    this.handleFirstNameOnChange = this.handleFirstNameOnChange.bind(this);
+    this.handleLastNameOnChange = this.handleLastNameOnChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   makeModalClassName(show) {
@@ -43,6 +49,22 @@ class RegisterModal extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
+    const { email, first_name, last_name } = this.state;
+
+    const newUser = {
+      first_name,
+      last_name,
+      email
+    };
+
+    this.props.registerUser(newUser);
+
+    this.setState({
+      email: '',
+      first_name: '',
+      last_name: ''
+    });
   }
 
   render() {
@@ -81,7 +103,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    registerUser: user => {
+      dispatch(registerUser(user));
+    }
+  };
 };
 
 RegisterModal = connect(

@@ -4,6 +4,7 @@ import KanbanBoard from '../../components/KanbanBoard';
 import Header from '../../components/Header';
 import NewTaskModal from '../NewTaskModal';
 import EditTaskModal from '../EditTaskModal';
+import RegisterModal from '../RegisterModal';
 import './App.css';
 
 import { toggleAddModal, loadCards } from '../../actions';
@@ -18,7 +19,7 @@ class App extends Component {
       <div className="App">
         <NewTaskModal />
         <EditTaskModal />
-
+        <RegisterModal />
         <Header onNewTaskClick={this.props.onNewTaskClick} />
 
         <KanbanBoard cards={this.props.cards} />

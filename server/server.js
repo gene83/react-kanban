@@ -108,6 +108,27 @@ app.get('/cards', (req, res) => {
     });
 });
 
+app.put('/cards', (req, res) => {
+  const editedCard = req.body;
+
+  //null for now, havent integrated users yet
+  editedCard.created_by = null;
+  editedCard.assigned_to = null;
+
+  Card.where('id', editedCard.id)
+    .fetch()
+    .then(card => {
+      card
+        .save(editedCard)
+        .then(() => {
+          res.send('card updated succesfully');
+        })
+        .catch(err => {
+          res.send(err);
+        });
+    });
+});
+
 app.use(express.static('public'));
 
 app.listen(PORT, () => {

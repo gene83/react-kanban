@@ -54,9 +54,23 @@ export const hideEditModal = () => {
 };
 
 export const editCard = editedCard => {
-  return {
-    type: EDIT_CARD,
-    editedCard: editedCard
+  return dispatch => {
+    return fetch('/cards', {
+      method: 'PUT',
+      body: JSON.stringify(editedCard),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(() => {
+        return dispatch({
+          type: EDIT_CARD,
+          editedCard: editedCard
+        });
+      })
+      .catch(err => {
+        throw err;
+      });
   };
 };
 

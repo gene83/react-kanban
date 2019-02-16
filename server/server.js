@@ -50,9 +50,10 @@ passport.deserializeUser((user, done) => {
       return done(null, {
         id: dbUser.id,
         username: dbUser.username
-      }).catch(err => {
-        return done(err);
       });
+    })
+    .catch(err => {
+      return done(err);
     });
 });
 
@@ -175,6 +176,10 @@ app.post('/register', (req, res) => {
         });
     });
   });
+});
+
+app.post('/login', passport.authenticate('local'), (req, res) => {
+  res.send('success');
 });
 
 app.use(express.static('public'));

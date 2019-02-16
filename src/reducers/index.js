@@ -8,7 +8,8 @@ import {
   LOAD_CARDS,
   TOGGLE_REGISTER_MODAL,
   REGISTER_USER,
-  TOGGLE_LOGIN_MODAL
+  TOGGLE_LOGIN_MODAL,
+  LOGIN_USER
 } from '../actions';
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
   editModalTaskId: 0,
   showRegisterModal: false,
   showLoginModal: false,
+  currentUser: null,
   cards: [],
   users: []
 };
@@ -74,6 +76,10 @@ const cardReducer = (state = initialState, action) => {
     case TOGGLE_LOGIN_MODAL:
       return Object.assign({}, state, {
         showLoginModal: !state.showLoginModal
+      });
+    case LOGIN_USER:
+      return Object.assign({}, state, {
+        currentUser: action.user
       });
     default:
       return state;

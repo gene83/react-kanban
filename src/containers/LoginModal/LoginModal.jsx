@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { toggleLoginModal, loginUser } from '../../actions';
 
 class LoginModal extends Component {
   constructor(props) {
@@ -39,6 +40,22 @@ class LoginModal extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
+    const { username, password } = this.state;
+
+    const user = {
+      username,
+      password
+    };
+
+    this.props.loginUser(user);
+
+    this.setState({
+      username: '',
+      password: ''
+    });
+
+    this.props.closeModal();
   }
 
   render() {
@@ -71,7 +88,15 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    closeModal: () => {
+      dispatch(toggleLoginModal());
+    },
+
+    loginUser: user => {
+      dispatch(loginUser(user));
+    }
+  };
 };
 
 LoginModal = connect(

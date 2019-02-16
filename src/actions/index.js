@@ -8,6 +8,7 @@ export const LOAD_CARDS = 'LOAD_CARDS';
 export const TOGGLE_REGISTER_MODAL = 'TOGGLE_REGISTER_MODAL';
 export const REGISTER_USER = 'REGISTER_USER';
 export const TOGGLE_LOGIN_MODAL = 'TOGGLE_LOGIN_MODAL';
+export const LOGIN_USER = 'LOGIN_USER';
 
 export const deleteCard = id => {
   return dispatch => {
@@ -135,5 +136,26 @@ export const registerUser = user => {
 export const toggleLoginModal = () => {
   return {
     type: TOGGLE_LOGIN_MODAL
+  };
+};
+
+export const loginUser = user => {
+  return dispatch => {
+    return fetch('/login', {
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: {
+        'content-type': 'application/json'
+      }
+    }).then(res => {
+      console.log(res);
+      if (res.status === 401) {
+        return;
+      }
+      return dispatch({
+        type: LOGIN_USER,
+        user: user.username
+      });
+    });
   };
 };

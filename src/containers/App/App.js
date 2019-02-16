@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import NewTaskModal from '../NewTaskModal';
 import EditTaskModal from '../EditTaskModal';
 import RegisterModal from '../RegisterModal';
+import LoginModal from '../LoginModal/LoginModal';
 import './App.css';
 
 import { toggleAddModal, loadCards, toggleRegisterModal } from '../../actions';
@@ -20,6 +21,8 @@ class App extends Component {
         <NewTaskModal />
         <EditTaskModal />
         <RegisterModal />
+        <LoginModal />
+
         <Header
           onNewTaskClick={this.props.onNewTaskClick}
           onRegisterClick={this.props.onRegisterClick}

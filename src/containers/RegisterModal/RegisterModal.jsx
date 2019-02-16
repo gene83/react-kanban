@@ -9,12 +9,16 @@ class RegisterModal extends Component {
     this.state = {
       first_name: '',
       last_name: '',
-      email: ''
+      email: '',
+      username: '',
+      password: ''
     };
 
     this.handleEmailOnChange = this.handleEmailOnChange.bind(this);
     this.handleFirstNameOnChange = this.handleFirstNameOnChange.bind(this);
     this.handleLastNameOnChange = this.handleLastNameOnChange.bind(this);
+    this.handleUsernameOnChange = this.handleUsernameOnChange.bind(this);
+    this.handlePasswordOnChange = this.handlePasswordOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -47,15 +51,31 @@ class RegisterModal extends Component {
     });
   }
 
+  handleUsernameOnChange(e) {
+    const value = e.target.value;
+    this.setState({
+      username: value
+    });
+  }
+
+  handlePasswordOnChange(e) {
+    const value = e.target.value;
+    this.setState({
+      password: value
+    });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
-    const { email, first_name, last_name } = this.state;
+    const { email, first_name, last_name, username, password } = this.state;
 
     const newUser = {
       first_name,
       last_name,
-      email
+      email,
+      username,
+      password
     };
 
     this.props.registerUser(newUser);
@@ -63,7 +83,9 @@ class RegisterModal extends Component {
     this.setState({
       email: '',
       first_name: '',
-      last_name: ''
+      last_name: '',
+      username: '',
+      password: ''
     });
   }
 
@@ -88,6 +110,18 @@ class RegisterModal extends Component {
             type="text"
             value={this.state.email}
             onChange={this.handleEmailOnChange}
+          />
+          Username:
+          <input
+            type="text"
+            value={this.state.username}
+            onChange={this.handleUsernameOnChange}
+          />
+          Password:
+          <input
+            type="text"
+            value={this.state.password}
+            onChange={this.handlePasswordOnChange}
           />
           <button onClick={this.handleSubmit}>Register</button>
         </form>

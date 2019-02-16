@@ -15,28 +15,28 @@ const initialState = {
       key: 1,
       title: 'finish react-redux',
       body: '',
-      priority: 'blocker',
+      priority: '4',
       createdBy: 'gene',
       assignedTo: 'gene',
-      status: 'in_queue'
+      status: '1'
     },
     {
       key: 2,
       title: 'finish react-redux',
       body: '',
-      priority: 'Low',
+      priority: '1',
       createdBy: 'gene',
       assignedTo: 'gene',
-      status: 'in_progress'
+      status: '2'
     },
     {
       key: 3,
       title: 'finish react-redux',
       body: '',
-      priority: 'High',
+      priority: '3',
       createdBy: 'gene',
       assignedTo: 'gene',
-      status: 'done'
+      status: '3'
     }
   ]
 };
@@ -58,7 +58,7 @@ const cardReducer = (state = initialState, action) => {
         showNewTaskModal: !state.showNewTaskModal
       });
     case ADD_CARD:
-      action.newCard.status = 'In Queue';
+      action.newCard.status = '1';
       action.newCard.key = id++;
       return Object.assign({}, state, {
         cards: [...state.cards, action.newCard]

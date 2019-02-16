@@ -19,9 +19,23 @@ export const toggleAddModal = () => {
 };
 
 export const addCard = newCard => {
-  return {
-    type: ADD_CARD,
-    newCard: newCard
+  return dispatch => {
+    return fetch('/cards', {
+      method: 'POST',
+      body: JSON.stringify(newCard),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(() => {
+        return dispatch({
+          type: ADD_CARD,
+          newCard: newCard
+        });
+      })
+      .catch(err => {
+        throw err;
+      });
   };
 };
 

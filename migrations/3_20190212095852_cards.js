@@ -2,7 +2,7 @@ exports.up = function(knex, Promise) {
   return knex.schema.createTable('cards', table => {
     table.increments();
     table.string('title').notNullable();
-    table.string('body', 1024).notNullable();
+    table.string('body', 1024);
     table
       .integer('priority_id')
       .references('id')

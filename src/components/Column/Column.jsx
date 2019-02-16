@@ -24,13 +24,13 @@ const Column = props => {
   let columnTitle;
 
   switch (columnStatus) {
-    case 'in_queue':
+    case '1':
       columnTitle = 'In Queue';
       break;
-    case 'in_progress':
+    case '2':
       columnTitle = 'In Progress';
       break;
-    case 'done':
+    case '3':
       columnTitle = 'Done';
       break;
     default:

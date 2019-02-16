@@ -87,10 +87,10 @@ class NewTaskModal extends Component {
           Priority:
           <select onChange={this.handlePriorityOnChange}>
             <option value="" />
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-            <option value="blocker">Blocker</option>
+            <option value="1">Low</option>
+            <option value="2">Medium</option>
+            <option value="3">High</option>
+            <option value="4">Blocker</option>
           </select>
           Created By:
           <input

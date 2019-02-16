@@ -7,9 +7,9 @@ const KanbanBoard = props => {
 
   return (
     <div className="board">
-      <Column cards={cards} columnStatus="in_queue" />
-      <Column cards={cards} columnStatus="in_progress" />
-      <Column cards={cards} columnStatus="done" />
+      <Column cards={cards} columnStatus="1" />
+      <Column cards={cards} columnStatus="2" />
+      <Column cards={cards} columnStatus="3" />
     </div>
   );
 };

@@ -116,9 +116,16 @@ export const registerUser = user => {
         'content-type': 'application/json'
       }
     }).then(() => {
+      const { username, first_name } = user;
+
+      const newReduxStoreUser = {
+        username,
+        first_name
+      };
+
       return dispatch({
         type: REGISTER_USER,
-        user: user
+        user: newReduxStoreUser
       });
     });
   };

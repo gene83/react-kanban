@@ -1,7 +1,15 @@
-import { DELETE_CARD, TOGGLE_ADD_MODAL, ADD_CARD } from '../actions';
+import {
+  DELETE_CARD,
+  TOGGLE_ADD_MODAL,
+  ADD_CARD,
+  SHOW_EDIT_MODAL,
+  HIDE_EDIT_MODAL,
+  EDIT_CARD
+} from '../actions';
 
 const initialState = {
   showNewTaskModal: false,
+  editModalTaskId: 0,
   cards: [
     {
       key: 1,
@@ -10,7 +18,7 @@ const initialState = {
       priority: 'blocker',
       createdBy: 'gene',
       assignedTo: 'gene',
-      status: 'In Queue'
+      status: 'in_queue'
     },
     {
       key: 2,
@@ -19,7 +27,7 @@ const initialState = {
       priority: 'Low',
       createdBy: 'gene',
       assignedTo: 'gene',
-      status: 'In Progress'
+      status: 'in_progress'
     },
     {
       key: 3,
@@ -28,7 +36,7 @@ const initialState = {
       priority: 'High',
       createdBy: 'gene',
       assignedTo: 'gene',
-      status: 'Done'
+      status: 'done'
     }
   ]
 };
@@ -54,6 +62,23 @@ const cardReducer = (state = initialState, action) => {
       action.newCard.key = id++;
       return Object.assign({}, state, {
         cards: [...state.cards, action.newCard]
+      });
+    case SHOW_EDIT_MODAL:
+      return Object.assign({}, state, {
+        editModalTaskId: action.id
+      });
+    case HIDE_EDIT_MODAL:
+      return Object.assign({}, state, {
+        editModalTaskId: 0
+      });
+    case EDIT_CARD:
+      const editIndex = state.cards.findIndex(
+        card => card.key === action.editedCard.key
+      );
+      return Object.assign({}, state, {
+        cards: state.cards
+          .slice(0, editIndex)
+          .concat(action.editedCard, state.cards.slice(editIndex + 1))
       });
     default:
       return state;

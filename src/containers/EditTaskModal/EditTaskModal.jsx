@@ -1,38 +1,55 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './NewTaskModal.css';
-import { addCard, toggleAddModal } from '../../actions';
+import { hideEditModal, editCard } from '../../actions';
 
-class NewTaskModal extends Component {
+class EditTaskModal extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       title: '',
+      body: '',
+      status: '',
       priority: '',
       createdBy: '',
       assignedTo: ''
     };
 
     this.handleTitleOnChange = this.handleTitleOnChange.bind(this);
+    this.handleBodyOnChange = this.handleBodyOnChange.bind(this);
+    this.handleStatusOnChange = this.handleStatusOnChange.bind(this);
     this.handlePriorityOnChange = this.handlePriorityOnChange.bind(this);
     this.handleCreatedByOnChange = this.handleCreatedByOnChange.bind(this);
     this.handleAssignedToOnChange = this.handleAssignedToOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  makeModalClassname(show) {
+  makeModalClassName(show) {
     if (show) {
-      return 'modal show-modal';
+      return 'edit-modal show-modal';
     }
 
-    return 'modal hide-modal';
+    return 'edit-modal hide-modal';
   }
 
   handleTitleOnChange(e) {
     const value = e.target.value;
     this.setState({
       title: value
+    });
+  }
+
+  handleBodyOnChange(e) {
+    const value = e.target.value;
+    this.setState({
+      body: value
+    });
+  }
+
+  handleStatusOnChange(e) {
+    const value = e.target.value;
+    this.setState({
+      status: value
     });
   }
 
@@ -60,12 +77,21 @@ class NewTaskModal extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const { title, priority, createdBy, assignedTo } = this.state;
+    const { title, body, priority, createdBy, assignedTo, status } = this.state;
 
-    this.props.onAdd({ title, priority, createdBy, assignedTo });
+    this.props.onEdit({
+      key: this.props.editModalTaskId,
+      title,
+      body,
+      priority,
+      status,
+      createdBy,
+      assignedTo
+    });
 
     this.setState({
       title: '',
+      body: '',
       priority: '',
       createdBy: '',
       assignedTo: ''
@@ -76,7 +102,8 @@ class NewTaskModal extends Component {
 
   render() {
     return (
-      <div className={this.makeModalClassname(this.props.showNewTaskModal)}>
+      <div className={this.makeModalClassName(this.props.editModalTaskId)}>
+        Edit Task: {this.props.editModalTaskId}
         <form>
           Title:
           <input
@@ -84,6 +111,18 @@ class NewTaskModal extends Component {
             value={this.state.title}
             onChange={this.handleTitleOnChange}
           />
+          Body:
+          <input
+            type="text"
+            value={this.state.body}
+            onChange={this.handleBodyOnChange}
+          />
+          Status:
+          <select onChange={this.handleStatusOnChange}>
+            <option value="in_queue">In Queue</option>
+            <option value="in_progress">In Progress</option>
+            <option value="done">Done</option>
+          </select>
           Priority:
           <select onChange={this.handlePriorityOnChange}>
             <option value="" />
@@ -92,7 +131,7 @@ class NewTaskModal extends Component {
             <option value="high">High</option>
             <option value="blocker">Blocker</option>
           </select>
-          Created By:
+          CreatedBy:
           <input
             type="text"
             value={this.state.createdBy}
@@ -104,7 +143,7 @@ class NewTaskModal extends Component {
             value={this.state.assignedTo}
             onChange={this.handleAssignedToOnChange}
           />
-          <button onClick={this.handleSubmit}>Create Task</button>
+          <button onClick={this.handleSubmit}>Edit Task</button>
         </form>
       </div>
     );
@@ -113,25 +152,24 @@ class NewTaskModal extends Component {
 
 const mapStateToProps = state => {
   return {
-    showNewTaskModal: state.showNewTaskModal
+    editModalTaskId: state.editModalTaskId
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAdd: newCard => {
-      dispatch(addCard(newCard));
-    },
-
     closeModal: () => {
-      dispatch(toggleAddModal());
+      dispatch(hideEditModal());
+    },
+    onEdit: editedCard => {
+      dispatch(editCard(editedCard));
     }
   };
 };
 
-NewTaskModal = connect(
+EditTaskModal = connect(
   mapStateToProps,
   mapDispatchToProps
-)(NewTaskModal);
+)(EditTaskModal);
 
-export default NewTaskModal;
+export default EditTaskModal;

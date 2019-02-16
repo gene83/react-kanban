@@ -3,22 +3,21 @@ import { connect } from 'react-redux';
 import KanbanBoard from '../../components/KanbanBoard';
 import Header from '../../components/Header';
 import NewTaskModal from '../NewTaskModal';
+import EditTaskModal from '../EditTaskModal';
 import './App.css';
 
-import { deleteCard, toggleAddModal } from '../../actions';
+import { toggleAddModal } from '../../actions';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <NewTaskModal />
+        <EditTaskModal />
 
         <Header onNewTaskClick={this.props.onNewTaskClick} />
 
-        <KanbanBoard
-          cards={this.props.cards}
-          onDeleteClick={this.props.onDeleteClick}
-        />
+        <KanbanBoard cards={this.props.cards} />
       </div>
     );
   }
@@ -33,10 +32,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onDeleteClick: id => {
-      dispatch(deleteCard(id));
-    },
-
     onNewTaskClick: () => {
       dispatch(toggleAddModal());
     }

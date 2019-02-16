@@ -6,12 +6,13 @@ const Column = props => {
   const { columnStatus } = props;
   const cards = props.cards
     .filter(card => {
-      return card.status === columnStatus;
+      return card.status_id === columnStatus;
     })
     .map(card => {
       return (
         <Card
-          id={card.key}
+          key={card.id}
+          id={card.id}
           title={card.title}
           body={card.body}
           priority={card.priority}
@@ -24,13 +25,13 @@ const Column = props => {
   let columnTitle;
 
   switch (columnStatus) {
-    case '1':
+    case 1:
       columnTitle = 'In Queue';
       break;
-    case '2':
+    case 2:
       columnTitle = 'In Progress';
       break;
-    case '3':
+    case 3:
       columnTitle = 'Done';
       break;
     default:

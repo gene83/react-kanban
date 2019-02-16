@@ -8,6 +8,7 @@ const redis = require('connect-redis')(session);
 const flash = require('connect-flash');
 
 const User = require('../database/models/User');
+const Card = require('../database/models/Card');
 
 const PORT = process.env.PORT || 8080;
 const ENV = process.env.NODE_ENV || 'development';
@@ -79,6 +80,27 @@ passport.use(
       });
   })
 );
+
+app.post('/cards', (req, res) => {
+  console.log(req.body);
+
+  const newCard = {
+    title: req.body.title,
+    priority_id: parseInt(req.body.priority),
+    status_id: 1
+  };
+
+  console.log(newCard);
+
+  new Card(newCard)
+    .save()
+    .then(() => {
+      return res.send('task posted succesfuly');
+    })
+    .catch(err => {
+      return res.send(err);
+    });
+});
 
 app.use(express.static('public'));
 

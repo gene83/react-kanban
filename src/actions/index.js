@@ -5,6 +5,8 @@ export const SHOW_EDIT_MODAL = 'SHOW_EDIT_MODAL';
 export const HIDE_EDIT_MODAL = 'HIDE_EDIT_MODAL';
 export const EDIT_CARD = 'EDIT_CARD';
 export const LOAD_CARDS = 'LOAD_CARDS';
+export const TOGGLE_REGISTER_MODAL = 'TOGGLE_REGISTER_MODAL';
+export const REGISTER_USER = 'REGISTER_USER';
 
 export const deleteCard = id => {
   return dispatch => {
@@ -92,5 +94,35 @@ export const loadCards = cards => {
           cards: cards
         });
       });
+  };
+};
+
+export const toggleRegisterModal = () => {
+  return {
+    type: TOGGLE_REGISTER_MODAL
+  };
+};
+
+export const registerUser = user => {
+  return dispatch => {
+    return fetch('/register', {
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: {
+        'content-type': 'application/json'
+      }
+    }).then(() => {
+      const { username, first_name } = user;
+
+      const newReduxStoreUser = {
+        username,
+        first_name
+      };
+
+      return dispatch({
+        type: REGISTER_USER,
+        user: newReduxStoreUser
+      });
+    });
   };
 };

@@ -4,9 +4,10 @@ import KanbanBoard from '../../components/KanbanBoard';
 import Header from '../../components/Header';
 import NewTaskModal from '../NewTaskModal';
 import EditTaskModal from '../EditTaskModal';
+import RegisterModal from '../RegisterModal';
 import './App.css';
 
-import { toggleAddModal, loadCards } from '../../actions';
+import { toggleAddModal, loadCards, toggleRegisterModal } from '../../actions';
 
 class App extends Component {
   componentDidMount() {
@@ -18,8 +19,11 @@ class App extends Component {
       <div className="App">
         <NewTaskModal />
         <EditTaskModal />
-
-        <Header onNewTaskClick={this.props.onNewTaskClick} />
+        <RegisterModal />
+        <Header
+          onNewTaskClick={this.props.onNewTaskClick}
+          onRegisterClick={this.props.onRegisterClick}
+        />
 
         <KanbanBoard cards={this.props.cards} />
       </div>
@@ -42,6 +46,10 @@ const mapDispatchToProps = dispatch => {
 
     loadCards: () => {
       dispatch(loadCards());
+    },
+
+    onRegisterClick: () => {
+      dispatch(toggleRegisterModal());
     }
   };
 };

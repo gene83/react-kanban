@@ -1,10 +1,11 @@
 import React from 'react';
 
 const Header = props => {
-  const { onNewTaskClick } = props;
+  const { onNewTaskClick, onRegisterClick } = props;
 
   return (
     <div className="header">
+      <button onClick={onRegisterClick}>Register</button>
       <div className="title">KANBAN</div>
       <button className="add-card-button" onClick={onNewTaskClick}>
         NEW TASK

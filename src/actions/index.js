@@ -8,12 +8,8 @@ export const LOAD_CARDS = 'LOAD_CARDS';
 
 export const deleteCard = id => {
   return dispatch => {
-    return fetch('/cards', {
-      method: 'DELETE',
-      body: JSON.stringify({ id: id }),
-      headers: {
-        'content-type': 'application/json'
-      }
+    return fetch(`/cards/${id}`, {
+      method: 'DELETE'
     }).then(() => {
       return dispatch({
         type: DELETE_CARD,
@@ -65,7 +61,7 @@ export const hideEditModal = () => {
 
 export const editCard = editedCard => {
   return dispatch => {
-    return fetch('/cards', {
+    return fetch(`/cards/${editedCard.id}`, {
       method: 'PUT',
       body: JSON.stringify(editedCard),
       headers: {

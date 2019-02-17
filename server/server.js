@@ -83,6 +83,43 @@ passport.use(
   })
 );
 
+app.post('/register', (req, res) => {
+  const newUser = req.body;
+
+  bcrypt.genSalt(saltRounds, (err, salt) => {
+    if (err) {
+      res.writeHead(500);
+      return res.send('Error Creating Account');
+    }
+
+    bcrypt.hash(newUser.password, salt, (err, hash) => {
+      if (err) {
+        res.writeHead(500);
+        return res.send('Error creating account');
+      }
+
+      return new User({
+        username: newUser.username,
+        password: hash,
+        first_name: newUser.first_name,
+        last_name: newUser.last_name,
+        email: newUser.email
+      })
+        .save()
+        .then(() => {
+          res.send('Account created successfully');
+        })
+        .catch(err => {
+          res.send(err);
+        });
+    });
+  });
+});
+
+app.post('/login', passport.authenticate('local'), (req, res) => {
+  res.send('success');
+});
+
 app.use('/cards', cardRouter);
 app.use(express.static('public'));
 

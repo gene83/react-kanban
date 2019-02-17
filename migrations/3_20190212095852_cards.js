@@ -16,8 +16,8 @@ exports.up = function(knex, Promise) {
     table
       .integer('created_by')
       .references('id')
-      .inTable('users');
-    // .notNullable();
+      .inTable('users')
+      .notNullable();
     table
       .integer('assigned_to')
       .references('id')

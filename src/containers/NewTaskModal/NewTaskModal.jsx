@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './NewTaskModal.css';
-import { addCard, toggleAddModal } from '../../actions';
+import { addCard, toggleAddModal, loadUsers } from '../../actions';
+import UserOption from '../../components/UserOption';
 
 class NewTaskModal extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class NewTaskModal extends Component {
       assignedTo: ''
     };
 
+    this.generateUserOptions = this.generateUserOptions.bind(this);
     this.handleTitleOnChange = this.handleTitleOnChange.bind(this);
     this.handlePriorityOnChange = this.handlePriorityOnChange.bind(this);
     this.handleCreatedByOnChange = this.handleCreatedByOnChange.bind(this);
@@ -74,6 +76,16 @@ class NewTaskModal extends Component {
     this.props.closeModal();
   }
 
+  componentDidMount() {
+    return this.props.loadUsers;
+  }
+
+  generateUserOptions = users => {
+    return users.map(user => {
+      return <UserOption id={user.id} first_name={user.first_name} />;
+    });
+  };
+
   render() {
     return (
       <div className={this.makeModalClassname(this.props.showNewTaskModal)}>
@@ -92,18 +104,14 @@ class NewTaskModal extends Component {
             <option value="3">High</option>
             <option value="4">Blocker</option>
           </select>
-          Created By:
-          <input
-            type="text"
-            value={this.state.createdBy}
-            onChange={this.handleCreatedByOnChange}
-          />
+          CreatedBy:
+          <select onChange={this.handleCreatedByOnChange}>
+            {this.generateUserOptions(this.props.users)}
+          </select>
           Assigned To:
-          <input
-            type="text"
-            value={this.state.assignedTo}
-            onChange={this.handleAssignedToOnChange}
-          />
+          <select onChange={this.handleAssignedToOnChange}>
+            {this.generateUserOptions(this.props.users)}
+          </select>
           <button onClick={this.handleSubmit}>Create Task</button>
         </form>
       </div>
@@ -113,7 +121,8 @@ class NewTaskModal extends Component {
 
 const mapStateToProps = state => {
   return {
-    showNewTaskModal: state.showNewTaskModal
+    showNewTaskModal: state.showNewTaskModal,
+    users: state.users
   };
 };
 
@@ -125,6 +134,10 @@ const mapDispatchToProps = dispatch => {
 
     closeModal: () => {
       dispatch(toggleAddModal());
+    },
+
+    loadUsers: () => {
+      dispatch(loadUsers());
     }
   };
 };

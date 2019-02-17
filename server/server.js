@@ -50,9 +50,10 @@ passport.deserializeUser((user, done) => {
       return done(null, {
         id: dbUser.id,
         username: dbUser.username
-      }).catch(err => {
-        return done(err);
       });
+    })
+    .catch(err => {
+      return done(err);
     });
 });
 

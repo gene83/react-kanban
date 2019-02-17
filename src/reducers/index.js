@@ -7,13 +7,17 @@ import {
   EDIT_CARD,
   LOAD_CARDS,
   TOGGLE_REGISTER_MODAL,
-  REGISTER_USER
+  REGISTER_USER,
+  TOGGLE_LOGIN_MODAL,
+  LOGIN_USER
 } from '../actions';
 
 const initialState = {
   showNewTaskModal: false,
   editModalTaskId: 0,
   showRegisterModal: false,
+  showLoginModal: false,
+  currentUser: null,
   cards: [],
   users: []
 };
@@ -68,6 +72,14 @@ const cardReducer = (state = initialState, action) => {
     case REGISTER_USER:
       return Object.assign({}, state, {
         users: state.users.concat(action.user)
+      });
+    case TOGGLE_LOGIN_MODAL:
+      return Object.assign({}, state, {
+        showLoginModal: !state.showLoginModal
+      });
+    case LOGIN_USER:
+      return Object.assign({}, state, {
+        currentUser: action.user
       });
     default:
       return state;

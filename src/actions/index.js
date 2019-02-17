@@ -9,6 +9,7 @@ export const TOGGLE_REGISTER_MODAL = 'TOGGLE_REGISTER_MODAL';
 export const REGISTER_USER = 'REGISTER_USER';
 export const TOGGLE_LOGIN_MODAL = 'TOGGLE_LOGIN_MODAL';
 export const LOGIN_USER = 'LOGIN_USER';
+export const LOAD_USERS = 'LOAD_USERS';
 
 export const deleteCard = id => {
   return dispatch => {
@@ -113,19 +114,16 @@ export const registerUser = user => {
       headers: {
         'content-type': 'application/json'
       }
-    }).then(() => {
-      const { username, first_name } = user;
-
-      const newReduxStoreUser = {
-        username,
-        first_name
-      };
-
-      return dispatch({
-        type: REGISTER_USER,
-        user: newReduxStoreUser
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(newUser => {
+        return dispatch({
+          type: REGISTER_USER,
+          user: newUser
+        });
       });
-    });
   };
 };
 
@@ -152,5 +150,30 @@ export const loginUser = user => {
         user: user.username
       });
     });
+  };
+};
+
+export const loadUsers = () => {
+  return dispatch => {
+    return fetch('/users')
+      .then(response => {
+        const fullList = response.json();
+        const selectedUserValues = fullList.map(user => {
+          const { id, username, first_name } = user;
+          return {
+            id,
+            username,
+            first_name
+          };
+        });
+
+        return selectedUserValues;
+      })
+      .then(userList => {
+        return dispatch({
+          type: LOAD_USERS,
+          list: userList
+        });
+      });
   };
 };

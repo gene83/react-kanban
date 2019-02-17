@@ -106,8 +106,18 @@ app.post('/register', (req, res) => {
         email: newUser.email
       })
         .save()
-        .then(() => {
-          res.send('Account created successfully');
+        .then(user => {
+          user = user.toJSON();
+
+          const { username, first_name, id } = user;
+
+          const newUser = {
+            username,
+            first_name,
+            id
+          };
+
+          return res.json(newUser);
         })
         .catch(err => {
           res.send(err);

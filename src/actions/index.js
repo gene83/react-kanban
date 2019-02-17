@@ -6,10 +6,16 @@ export const HIDE_EDIT_MODAL = 'HIDE_EDIT_MODAL';
 export const EDIT_CARD = 'EDIT_CARD';
 export const LOAD_CARDS = 'LOAD_CARDS';
 
-export const deleteCard = key => {
-  return {
-    type: DELETE_CARD,
-    key: key
+export const deleteCard = id => {
+  return dispatch => {
+    return fetch(`/cards/${id}`, {
+      method: 'DELETE'
+    }).then(() => {
+      return dispatch({
+        type: DELETE_CARD,
+        id: id
+      });
+    });
   };
 };
 
@@ -55,7 +61,7 @@ export const hideEditModal = () => {
 
 export const editCard = editedCard => {
   return dispatch => {
-    return fetch('/cards', {
+    return fetch(`/cards/${editedCard.id}`, {
       method: 'PUT',
       body: JSON.stringify(editedCard),
       headers: {

@@ -8,7 +8,7 @@ const redis = require('connect-redis')(session);
 const flash = require('connect-flash');
 
 const User = require('../database/models/User');
-const Card = require('../database/models/Card');
+const cardRouter = require('./routes/cards');
 
 const PORT = process.env.PORT || 8080;
 const ENV = process.env.NODE_ENV || 'development';
@@ -81,54 +81,7 @@ passport.use(
   })
 );
 
-app.post('/cards', (req, res) => {
-  const newCard = {
-    title: req.body.title,
-    priority_id: parseInt(req.body.priority),
-    status_id: 1
-  };
-
-  new Card(newCard)
-    .save()
-    .then(() => {
-      return res.send('task posted succesfuly');
-    })
-    .catch(err => {
-      return res.send(err);
-    });
-});
-
-app.get('/cards', (req, res) => {
-  Card.fetchAll()
-    .then(cards => {
-      res.json(cards);
-    })
-    .catch(err => {
-      res.send(err);
-    });
-});
-
-app.put('/cards', (req, res) => {
-  const editedCard = req.body;
-
-  //null for now, havent integrated users yet
-  editedCard.created_by = null;
-  editedCard.assigned_to = null;
-
-  Card.where('id', editedCard.id)
-    .fetch()
-    .then(card => {
-      card
-        .save(editedCard)
-        .then(() => {
-          res.send('card updated succesfully');
-        })
-        .catch(err => {
-          res.send(err);
-        });
-    });
-});
-
+app.use('/cards', cardRouter);
 app.use(express.static('public'));
 
 app.listen(PORT, () => {

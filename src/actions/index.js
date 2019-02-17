@@ -157,12 +157,12 @@ export const loadUsers = () => {
   return dispatch => {
     return fetch('/users')
       .then(response => {
-        response.json();
+        return response.json();
       })
       .then(userList => {
         return dispatch({
           type: LOAD_USERS,
-          list: userList
+          users: userList
         });
       });
   };

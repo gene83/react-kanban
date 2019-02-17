@@ -84,7 +84,7 @@ const cardReducer = (state = initialState, action) => {
       });
     case LOAD_USERS:
       return Object.assign({}, state, {
-        users: action.userList
+        users: action.users
       });
     default:
       return state;

@@ -9,7 +9,7 @@ const flash = require('connect-flash');
 const saltRounds = 12;
 
 const User = require('../database/models/User');
-const Card = require('../database/models/Card');
+const cardRouter = require('./routes/cards');
 
 const PORT = process.env.PORT || 8080;
 const ENV = process.env.NODE_ENV || 'development';
@@ -82,6 +82,7 @@ passport.use(
   })
 );
 
+<<<<<<< HEAD
 app.post('/cards', (req, res) => {
   const newCard = {
     title: req.body.title,
@@ -176,6 +177,9 @@ app.post('/register', (req, res) => {
   });
 });
 
+=======
+app.use('/cards', cardRouter);
+>>>>>>> dev
 app.use(express.static('public'));
 
 app.listen(PORT, () => {

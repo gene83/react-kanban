@@ -157,17 +157,7 @@ export const loadUsers = () => {
   return dispatch => {
     return fetch('/users')
       .then(response => {
-        const fullList = response.json();
-        const selectedUserValues = fullList.map(user => {
-          const { id, username, first_name } = user;
-          return {
-            id,
-            username,
-            first_name
-          };
-        });
-
-        return selectedUserValues;
+        response.json();
       })
       .then(userList => {
         return dispatch({

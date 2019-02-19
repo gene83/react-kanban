@@ -9,7 +9,8 @@ import {
   TOGGLE_REGISTER_MODAL,
   REGISTER_USER,
   TOGGLE_LOGIN_MODAL,
-  LOGIN_USER
+  LOGIN_USER,
+  LOAD_USERS
 } from '../actions';
 
 const initialState = {
@@ -18,11 +19,12 @@ const initialState = {
   showRegisterModal: false,
   showLoginModal: false,
   currentUser: null,
+  registerSuccess: false,
   cards: [],
   users: []
 };
 
-let id = 4;
+let id = 5;
 
 const cardReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -39,8 +41,8 @@ const cardReducer = (state = initialState, action) => {
         showNewTaskModal: !state.showNewTaskModal
       });
     case ADD_CARD:
-      action.newCard.status = '1';
-      action.newCard.key = id++;
+      action.newCard.status = 1;
+      action.newCard.id = id++;
       return Object.assign({}, state, {
         cards: [...state.cards, action.newCard]
       });
@@ -71,7 +73,7 @@ const cardReducer = (state = initialState, action) => {
       });
     case REGISTER_USER:
       return Object.assign({}, state, {
-        users: state.users.concat(action.user)
+        registerSuccess: action.success
       });
     case TOGGLE_LOGIN_MODAL:
       return Object.assign({}, state, {
@@ -80,6 +82,10 @@ const cardReducer = (state = initialState, action) => {
     case LOGIN_USER:
       return Object.assign({}, state, {
         currentUser: action.user
+      });
+    case LOAD_USERS:
+      return Object.assign({}, state, {
+        users: action.users
       });
     default:
       return state;

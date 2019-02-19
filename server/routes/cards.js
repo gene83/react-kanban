@@ -3,11 +3,9 @@ const router = express.Router();
 const Card = require('../../database/models/Card');
 
 router.post('/', (req, res) => {
-  const newCard = {
-    title: req.body.title,
-    priority_id: parseInt(req.body.priority),
-    status_id: 1
-  };
+  const newCard = req.body;
+
+  newCard.status_id = 1;
 
   new Card(newCard)
     .save()
@@ -32,10 +30,6 @@ router.get('/', (req, res) => {
 router.put('/:id', (req, res) => {
   const editedCard = req.body;
   const id = req.params.id;
-
-  //null for now, havent integrated users yet
-  editedCard.created_by = null;
-  editedCard.assigned_to = null;
 
   Card.where('id', id)
     .fetch()

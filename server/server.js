@@ -107,10 +107,14 @@ app.post('/register', (req, res) => {
       })
         .save()
         .then(() => {
-          res.send('Account created successfully');
+          res.json({
+            success: true
+          });
         })
         .catch(err => {
-          res.send(err);
+          res.json({
+            success: false
+          });
         });
     });
   });
@@ -118,6 +122,28 @@ app.post('/register', (req, res) => {
 
 app.post('/login', passport.authenticate('local'), (req, res) => {
   res.send('success');
+});
+
+app.get('/users', (req, res) => {
+  User.fetchAll()
+    .then(allUserValues => {
+      allUserValues = allUserValues.toJSON();
+
+      const selectedUserValues = allUserValues.map(user => {
+        const { id, username, first_name } = user;
+
+        return {
+          id,
+          username,
+          first_name
+        };
+      });
+
+      res.json(selectedUserValues);
+    })
+    .catch(err => {
+      res.send(err);
+    });
 });
 
 app.use('/cards', cardRouter);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { hideEditModal, editCard } from '../../actions';
+import { hideEditModal, editCard, loadUsers } from '../../actions';
+import UserOption from '../../components/UserOption';
 
 class EditTaskModal extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class EditTaskModal extends Component {
       assigned_to: ''
     };
 
+    this.generateUserOptions = this.generateUserOptions.bind(this);
     this.handleTitleOnChange = this.handleTitleOnChange.bind(this);
     this.handleBodyOnChange = this.handleBodyOnChange.bind(this);
     this.handleStatusOnChange = this.handleStatusOnChange.bind(this);
@@ -107,6 +109,16 @@ class EditTaskModal extends Component {
     this.props.closeModal();
   }
 
+  componentDidMount() {
+    return this.props.loadUsers();
+  }
+
+  generateUserOptions = users => {
+    return users.map(user => {
+      return <UserOption id={user.id} first_name={user.first_name} />;
+    });
+  };
+
   render() {
     return (
       <div className={this.makeModalClassName(this.props.editModalTaskId)}>
@@ -139,17 +151,13 @@ class EditTaskModal extends Component {
             <option value="4">Blocker</option>
           </select>
           CreatedBy:
-          <input
-            type="text"
-            value={this.state.created_by}
-            onChange={this.handleCreatedByOnChange}
-          />
+          <select onChange={this.handleCreatedByOnChange}>
+            {this.generateUserOptions(this.props.users)}
+          </select>
           Assigned To:
-          <input
-            type="text"
-            value={this.state.assigned_to}
-            onChange={this.handleAssignedToOnChange}
-          />
+          <select onChange={this.handleAssignedToOnChange}>
+            {this.generateUserOptions(this.props.users)}
+          </select>
           <button onClick={this.handleSubmit}>Edit Task</button>
         </form>
       </div>
@@ -159,7 +167,8 @@ class EditTaskModal extends Component {
 
 const mapStateToProps = state => {
   return {
-    editModalTaskId: state.editModalTaskId
+    editModalTaskId: state.editModalTaskId,
+    users: state.users
   };
 };
 
@@ -170,6 +179,9 @@ const mapDispatchToProps = dispatch => {
     },
     onEdit: editedCard => {
       dispatch(editCard(editedCard));
+    },
+    loadUsers: () => {
+      dispatch(loadUsers());
     }
   };
 };

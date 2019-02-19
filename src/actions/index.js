@@ -118,10 +118,10 @@ export const registerUser = user => {
       .then(response => {
         return response.json();
       })
-      .then(newUser => {
+      .then(response => {
         return dispatch({
           type: REGISTER_USER,
-          user: newUser
+          success: response.success
         });
       });
   };

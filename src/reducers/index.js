@@ -19,6 +19,7 @@ const initialState = {
   showRegisterModal: false,
   showLoginModal: false,
   currentUser: null,
+  registerSuccess: false,
   cards: [],
   users: []
 };
@@ -72,7 +73,7 @@ const cardReducer = (state = initialState, action) => {
       });
     case REGISTER_USER:
       return Object.assign({}, state, {
-        users: state.users.concat(action.user)
+        registerSuccess: action.success
       });
     case TOGGLE_LOGIN_MODAL:
       return Object.assign({}, state, {

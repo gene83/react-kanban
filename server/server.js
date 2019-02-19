@@ -106,21 +106,15 @@ app.post('/register', (req, res) => {
         email: newUser.email
       })
         .save()
-        .then(user => {
-          user = user.toJSON();
-
-          const { username, first_name, id } = user;
-
-          const newUser = {
-            username,
-            first_name,
-            id
-          };
-
-          return res.json(newUser);
+        .then(() => {
+          res.json({
+            success: true
+          });
         })
         .catch(err => {
-          res.send(err);
+          res.json({
+            success: false
+          });
         });
     });
   });

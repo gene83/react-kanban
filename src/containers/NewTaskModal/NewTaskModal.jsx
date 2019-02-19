@@ -10,14 +10,16 @@ class NewTaskModal extends Component {
 
     this.state = {
       title: '',
-      priority: '',
-      createdBy: '',
-      assignedTo: ''
+      body: '',
+      priority_id: '',
+      created_by: '',
+      assigned_to: ''
     };
 
     this.generateUserOptions = this.generateUserOptions.bind(this);
     this.handleTitleOnChange = this.handleTitleOnChange.bind(this);
-    this.handlePriorityOnChange = this.handlePriorityOnChange.bind(this);
+    this.handleBodyOnChange = this.handleBodyOnChange.bind(this);
+    this.handlePriorityIdOnChange = this.handlePriorityIdOnChange.bind(this);
     this.handleCreatedByOnChange = this.handleCreatedByOnChange.bind(this);
     this.handleAssignedToOnChange = this.handleAssignedToOnChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,39 +40,53 @@ class NewTaskModal extends Component {
     });
   }
 
-  handlePriorityOnChange(e) {
+  handleBodyOnChange(e) {
     const value = e.target.value;
     this.setState({
-      priority: value
+      body: value
+    });
+  }
+
+  handlePriorityIdOnChange(e) {
+    const value = e.target.value;
+    this.setState({
+      priority_id: value
     });
   }
 
   handleCreatedByOnChange(e) {
     const value = e.target.value;
     this.setState({
-      createdBy: value
+      created_by: value
     });
   }
 
   handleAssignedToOnChange(e) {
     const value = e.target.value;
     this.setState({
-      assignedTo: value
+      assigned_to: value
     });
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
-    const { title, priority, createdBy, assignedTo } = this.state;
+    const { title, body, priority_id, created_by, assigned_to } = this.state;
 
-    this.props.onAdd({ title, priority, createdBy, assignedTo });
+    this.props.onAdd({
+      title,
+      body,
+      priority_id: parseInt(priority_id),
+      created_by: parseInt(created_by),
+      assigned_to: parseInt(assigned_to)
+    });
 
     this.setState({
       title: '',
-      priority: '',
-      createdBy: '',
-      assignedTo: ''
+      body: '',
+      priority_id: '',
+      created_by: '',
+      assigned_to: ''
     });
 
     this.props.closeModal();
@@ -96,8 +112,14 @@ class NewTaskModal extends Component {
             value={this.state.title}
             onChange={this.handleTitleOnChange}
           />
+          Body:
+          <input
+            type="text"
+            value={this.state.body}
+            onChange={this.handleBodyOnChange}
+          />
           Priority:
-          <select onChange={this.handlePriorityOnChange}>
+          <select onChange={this.handlePriorityIdOnChange}>
             <option value="" />
             <option value="1">Low</option>
             <option value="2">Medium</option>

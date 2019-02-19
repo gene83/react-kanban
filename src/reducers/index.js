@@ -40,8 +40,8 @@ const cardReducer = (state = initialState, action) => {
         showNewTaskModal: !state.showNewTaskModal
       });
     case ADD_CARD:
-      action.newCard.status = '1';
-      action.newCard.key = id++;
+      action.newCard.status = 1;
+      action.newCard.id = id++;
       return Object.assign({}, state, {
         cards: [...state.cards, action.newCard]
       });

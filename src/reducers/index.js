@@ -23,7 +23,7 @@ const initialState = {
   users: []
 };
 
-let id = 4;
+let id = 5;
 
 const cardReducer = (state = initialState, action) => {
   switch (action.type) {

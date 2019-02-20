@@ -1,16 +1,22 @@
 import React from 'react';
 import LoginAndRegister from '../LoginAndRegister';
-import { on } from 'cluster';
 
 const Header = props => {
-  const { onNewTaskClick, onRegisterClick, onLoginClick, isLoggedIn } = props;
+  const {
+    onNewTaskClick,
+    onRegisterClick,
+    onLoginClick,
+    currentUser,
+    onLogoutClick
+  } = props;
 
   return (
     <div className="header">
       <LoginAndRegister
         onRegisterClick={onRegisterClick}
         onLoginClick={onLoginClick}
-        isLoggedIn={isLoggedIn}
+        currentUser={currentUser}
+        onLogoutClick={onLogoutClick}
       />
       <div className="title">KANBAN</div>
       <button className="add-card-button" onClick={onNewTaskClick}>

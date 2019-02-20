@@ -123,6 +123,13 @@ app.post('/login', passport.authenticate('local'), (req, res) => {
   res.send('success');
 });
 
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.json({
+    success: true
+  });
+});
+
 app.get('/users', (req, res) => {
   User.fetchAll()
     .then(allUserValues => {

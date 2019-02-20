@@ -10,7 +10,8 @@ import {
   REGISTER_USER,
   TOGGLE_LOGIN_MODAL,
   LOGIN_USER,
-  LOAD_USERS
+  LOAD_USERS,
+  LOGOUT
 } from '../actions';
 
 const initialState = {
@@ -83,6 +84,10 @@ const cardReducer = (state = initialState, action) => {
     case LOAD_USERS:
       return Object.assign({}, state, {
         users: action.users
+      });
+    case LOGOUT:
+      return Object.assign({}, state, {
+        currentUser: undefined
       });
     default:
       return state;

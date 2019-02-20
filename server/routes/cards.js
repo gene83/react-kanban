@@ -14,7 +14,7 @@ router.post('/', (req, res) => {
         })
         .then(card => {
           card = card.toJSON();
-          console.log(card);
+
           const {
             id,
             title,

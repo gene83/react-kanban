@@ -11,22 +11,34 @@ class Card extends Component {
       this.props.id
     );
     this.boundOnEditClick = this.props.onEditClick.bind(null, this.props.id);
+    this.findCreatedBy = this.findCreatedBy.bind(this);
+    this.findPriority = this.findPriority.bind(this);
+    this.findAssignedTo = this.findAssignedTo.bind(this);
   }
 
   findCreatedBy = id => {
     const user = this.props.users.find(user => {
-      return user.created_by === id;
+      return user.id === id;
     });
-
+    console.log(id, this.props.users);
+    console.log(user);
     return user.first_name;
   };
 
   findAssignedTo = id => {
     const user = this.props.users.find(user => {
-      return user.assigned_to === id;
+      return user.id === id;
     });
 
     return user.first_name;
+  };
+
+  findPriority = id => {
+    const priority = this.props.priorities.find(priority => {
+      return priority.id === id;
+    });
+
+    return priority.name;
   };
 
   render() {
@@ -34,7 +46,9 @@ class Card extends Component {
       <div className="card">
         <h4 className="title">{this.props.title}</h4>
         <div className="body"> {this.props.body}</div>
-        <div className="priority">Priority: {this.props.priority}</div>
+        <div className="priority">
+          Priority: {this.findPriority(this.props.priority)}
+        </div>
         <div className="createdBy">
           Assigned by: {this.findCreatedBy(this.props.createdBy)}
         </div>
@@ -50,7 +64,8 @@ class Card extends Component {
 
 const mapStateToProps = state => {
   return {
-    users: state.users
+    users: state.users,
+    priorities: state.priorities
   };
 };
 

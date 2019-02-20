@@ -12,12 +12,16 @@ import {
   toggleAddModal,
   loadCards,
   toggleRegisterModal,
-  toggleLoginModal
+  toggleLoginModal,
+  loadPriorities,
+  loadUsers
 } from '../../actions';
 
 class App extends Component {
   componentDidMount() {
-    return this.props.loadCards();
+    this.props.loadCards();
+    this.props.loadUsers();
+    return this.props.loadPriorities();
   }
 
   render() {
@@ -63,6 +67,14 @@ const mapDispatchToProps = dispatch => {
 
     onLoginClick: () => {
       dispatch(toggleLoginModal());
+    },
+
+    loadPriorities: () => {
+      dispatch(loadPriorities());
+    },
+
+    loadUsers: () => {
+      dispatch(loadUsers());
     }
   };
 };

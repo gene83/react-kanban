@@ -9,6 +9,7 @@ const flash = require('connect-flash');
 const saltRounds = 12;
 
 const User = require('../database/models/User');
+const Priority = require('../database/models/Priority');
 const cardRouter = require('./routes/cards');
 
 const PORT = process.env.PORT || 8080;
@@ -143,6 +144,16 @@ app.get('/users', (req, res) => {
     })
     .catch(err => {
       res.send(err);
+    });
+});
+
+app.get('/priorities', (req, res) => {
+  Priority.fetchAll()
+    .then(priorities => {
+      res.json(priorities);
+    })
+    .catch(err => {
+      res.json(err);
     });
 });
 

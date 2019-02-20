@@ -18,8 +18,29 @@ router.post('/', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-  Card.fetchAll()
-    .then(cards => {
+  Card.fetchAll({
+    withRelated: ['status', 'priority', 'createdBy', 'assignedTo']
+  })
+    .then(cardList => {
+      cardList = cardList.toJSON();
+      const cards = [];
+
+      cardList.forEach(card => {
+        const { id, title, body } = card;
+
+        const newCard = {
+          id,
+          title,
+          body,
+          status: card.status.name,
+          priority: card.priority.name,
+          assignedTo: card.assignedTo.first_name,
+          createdBy: card.createdBy.first_name
+        };
+
+        cards.push(newCard);
+      });
+
       res.json(cards);
     })
     .catch(err => {

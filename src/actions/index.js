@@ -73,7 +73,10 @@ export const editCard = editedCard => {
         'Content-Type': 'application/json'
       }
     })
-      .then(() => {
+      .then(response => {
+        return response.json();
+      })
+      .then(editedCard => {
         return dispatch({
           type: EDIT_CARD,
           editedCard: editedCard

@@ -115,7 +115,9 @@ class EditTaskModal extends Component {
 
   generateUserOptions = users => {
     return users.map(user => {
-      return <UserOption id={user.id} first_name={user.first_name} />;
+      return (
+        <UserOption key={user.id} id={user.id} first_name={user.first_name} />
+      );
     });
   };
 

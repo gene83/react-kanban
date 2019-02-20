@@ -5,11 +5,9 @@ const passport = require('passport');
 const localStrategy = require('passport-local');
 const bcrypt = require('bcryptjs');
 const redis = require('connect-redis')(session);
-const flash = require('connect-flash');
 const saltRounds = 12;
 
 const User = require('../database/models/User');
-const Priority = require('../database/models/Priority');
 const cardRouter = require('./routes/cards');
 
 const PORT = process.env.PORT || 8080;

@@ -24,8 +24,6 @@ const initialState = {
   users: []
 };
 
-let id = 5;
-
 const cardReducer = (state = initialState, action) => {
   switch (action.type) {
     case DELETE_CARD:
@@ -41,10 +39,9 @@ const cardReducer = (state = initialState, action) => {
         showNewTaskModal: !state.showNewTaskModal
       });
     case ADD_CARD:
-      action.newCard.status = 1;
-      action.newCard.id = id++;
+      console.log(action.addedCard);
       return Object.assign({}, state, {
-        cards: [...state.cards, action.newCard]
+        cards: [...state.cards, action.addedCard]
       });
     case SHOW_EDIT_MODAL:
       return Object.assign({}, state, {

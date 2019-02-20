@@ -5,12 +5,42 @@ const Card = require('../../database/models/Card');
 router.post('/', (req, res) => {
   const newCard = req.body;
 
-  newCard.status_id = 1;
-
   new Card(newCard)
     .save()
-    .then(() => {
-      return res.send('task posted succesfuly');
+    .then(addedCard => {
+      Card.where('id', addedCard.id)
+        .fetch({
+          withRelated: ['status', 'priority', 'createdBy', 'assignedTo']
+        })
+        .then(card => {
+          card = card.toJSON();
+          console.log(card);
+          const {
+            id,
+            title,
+            body,
+            status_id,
+            priority_id,
+            created_by,
+            assigned_to
+          } = card;
+
+          const responseCard = {
+            id,
+            title,
+            body,
+            status_id,
+            priority_id,
+            created_by,
+            assigned_to,
+            status: card.status.name,
+            priority: card.priority.name,
+            assignedToName: card.assignedTo.first_name,
+            createdByName: card.createdBy.first_name
+          };
+
+          res.json(responseCard);
+        });
     })
     .catch(err => {
       return res.send(err);

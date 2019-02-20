@@ -76,6 +76,7 @@ class NewTaskModal extends Component {
     this.props.onAdd({
       title,
       body,
+      status_id: 1,
       priority_id: parseInt(priority_id),
       created_by: parseInt(created_by),
       assigned_to: parseInt(assigned_to)

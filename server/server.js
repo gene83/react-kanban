@@ -147,16 +147,6 @@ app.get('/users', (req, res) => {
     });
 });
 
-app.get('/priorities', (req, res) => {
-  Priority.fetchAll()
-    .then(priorities => {
-      res.json(priorities);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-});
-
 app.use('/cards', cardRouter);
 app.use(express.static('public'));
 

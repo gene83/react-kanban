@@ -26,16 +26,28 @@ router.get('/', (req, res) => {
       const cards = [];
 
       cardList.forEach(card => {
-        const { id, title, body } = card;
+        const {
+          id,
+          title,
+          body,
+          status_id,
+          priority_id,
+          created_by,
+          assigned_to
+        } = card;
 
         const newCard = {
           id,
           title,
           body,
+          status_id,
+          priority_id,
+          created_by,
+          assigned_to,
           status: card.status.name,
           priority: card.priority.name,
-          assignedTo: card.assignedTo.first_name,
-          createdBy: card.createdBy.first_name
+          assignedToName: card.assignedTo.first_name,
+          createdByName: card.createdBy.first_name
         };
 
         cards.push(newCard);

@@ -10,8 +10,7 @@ import {
   REGISTER_USER,
   TOGGLE_LOGIN_MODAL,
   LOGIN_USER,
-  LOAD_USERS,
-  LOAD_PRIORITIES
+  LOAD_USERS
 } from '../actions';
 
 const initialState = {
@@ -22,8 +21,7 @@ const initialState = {
   currentUser: null,
   registerSuccess: false,
   cards: [],
-  users: [],
-  priorities: []
+  users: []
 };
 
 let id = 5;
@@ -88,10 +86,6 @@ const cardReducer = (state = initialState, action) => {
     case LOAD_USERS:
       return Object.assign({}, state, {
         users: action.users
-      });
-    case LOAD_PRIORITIES:
-      return Object.assign({}, state, {
-        priorities: action.priorities
       });
     default:
       return state;

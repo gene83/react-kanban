@@ -10,7 +10,6 @@ export const REGISTER_USER = 'REGISTER_USER';
 export const TOGGLE_LOGIN_MODAL = 'TOGGLE_LOGIN_MODAL';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOAD_USERS = 'LOAD_USERS';
-export const LOAD_PRIORITIES = 'LOAD_PRIORITIES';
 
 export const deleteCard = id => {
   return dispatch => {
@@ -164,21 +163,6 @@ export const loadUsers = () => {
         return dispatch({
           type: LOAD_USERS,
           users: userList
-        });
-      });
-  };
-};
-
-export const loadPriorities = () => {
-  return dispatch => {
-    return fetch('/priorities')
-      .then(response => {
-        return response.json();
-      })
-      .then(priorities => {
-        return dispatch({
-          type: LOAD_PRIORITIES,
-          priorities: priorities
         });
       });
   };

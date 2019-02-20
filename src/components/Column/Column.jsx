@@ -16,8 +16,8 @@ const Column = props => {
           title={card.title}
           body={card.body}
           priority={card.priority}
-          createdBy={card.createdBy}
-          assignedTo={card.assignedTo}
+          createdBy={card.createdByName}
+          assignedTo={card.assignedToName}
         />
       );
     });

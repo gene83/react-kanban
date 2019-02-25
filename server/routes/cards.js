@@ -2,7 +2,15 @@ const express = require('express');
 const router = express.Router();
 const Card = require('../../database/models/Card');
 
-router.post('/', (req, res) => {
+function isAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    return res.status(401);
+  }
+}
+
+router.post('/', isAuthenticated, (req, res) => {
   const newCard = req.body;
 
   new Card(newCard)
@@ -90,7 +98,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', isAuthenticated, (req, res) => {
   const editedCard = req.body;
   const id = req.params.id;
 
@@ -140,7 +148,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', isAuthenticated, (req, res) => {
   const id = req.params.id;
 
   Card.where('id', id)

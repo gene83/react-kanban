@@ -16,11 +16,13 @@ export const deleteCard = id => {
   return dispatch => {
     return fetch(`/cards/${id}`, {
       method: 'DELETE'
-    }).then(() => {
-      return dispatch({
-        type: DELETE_CARD,
-        id: id
-      });
+    }).then(response => {
+      if (response.status !== 401) {
+        return dispatch({
+          type: DELETE_CARD,
+          id: id
+        });
+      }
     });
   };
 };

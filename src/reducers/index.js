@@ -40,7 +40,6 @@ const cardReducer = (state = initialState, action) => {
         showNewTaskModal: !state.showNewTaskModal
       });
     case ADD_CARD:
-      console.log(action.addedCard);
       return Object.assign({}, state, {
         cards: [...state.cards, action.addedCard]
       });

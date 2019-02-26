@@ -1,0 +1,96 @@
+import {
+  DELETE_CARD,
+  TOGGLE_ADD_MODAL,
+  ADD_CARD,
+  SHOW_EDIT_MODAL,
+  HIDE_EDIT_MODAL,
+  EDIT_CARD,
+  LOAD_CARDS,
+  TOGGLE_REGISTER_MODAL,
+  REGISTER_USER,
+  TOGGLE_LOGIN_MODAL,
+  LOGIN_USER,
+  LOAD_USERS,
+  LOGOUT
+} from '../actions';
+
+const initialState = {
+  showNewTaskModal: false,
+  editModalTaskId: 0,
+  showRegisterModal: false,
+  showLoginModal: false,
+  currentUser: null,
+  registerSuccess: false,
+  cards: [],
+  users: []
+};
+
+const cardReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case DELETE_CARD:
+      const index = state.cards.findIndex(card => card.id === action.id);
+      if (index === -1) {
+        return state;
+      }
+      return Object.assign({}, state, {
+        cards: state.cards.slice(0, index).concat(state.cards.slice(index + 1))
+      });
+    case TOGGLE_ADD_MODAL:
+      return Object.assign({}, state, {
+        showNewTaskModal: !state.showNewTaskModal
+      });
+    case ADD_CARD:
+      return Object.assign({}, state, {
+        cards: [...state.cards, action.addedCard]
+      });
+    case SHOW_EDIT_MODAL:
+      return Object.assign({}, state, {
+        editModalTaskId: action.id
+      });
+    case HIDE_EDIT_MODAL:
+      return Object.assign({}, state, {
+        editModalTaskId: 0
+      });
+    case EDIT_CARD:
+      const editIndex = state.cards.findIndex(
+        card => card.id === action.editedCard.id
+      );
+      return Object.assign({}, state, {
+        cards: state.cards
+          .slice(0, editIndex)
+          .concat(action.editedCard, state.cards.slice(editIndex + 1))
+      });
+    case LOAD_CARDS:
+      return Object.assign({}, state, {
+        cards: action.cards
+      });
+    case TOGGLE_REGISTER_MODAL:
+      return Object.assign({}, state, {
+        showRegisterModal: !state.showRegisterModal
+      });
+    case REGISTER_USER:
+      return Object.assign({}, state, {
+        registerSuccess: action.success
+      });
+    case TOGGLE_LOGIN_MODAL:
+      return Object.assign({}, state, {
+        showLoginModal: !state.showLoginModal
+      });
+    case LOGIN_USER:
+      return Object.assign({}, state, {
+        currentUser: action.user
+      });
+    case LOAD_USERS:
+      return Object.assign({}, state, {
+        users: action.users
+      });
+    case LOGOUT:
+      return Object.assign({}, state, {
+        currentUser: undefined
+      });
+    default:
+      return state;
+  }
+};
+
+export default cardReducer;

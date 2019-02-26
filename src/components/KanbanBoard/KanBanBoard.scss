@@ -1,0 +1,12 @@
+.board {
+  display: flex;
+  flex-flow: row nowrap;
+
+  .column {
+    border-left: 2px solid #d8d8d8;
+  }
+
+  .column:nth-child(1) {
+    border: none;
+  }
+}

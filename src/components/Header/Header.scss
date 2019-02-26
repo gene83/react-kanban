@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+
+  padding: 1em;
+
+  background-color: #434850;
+
+  h1 {
+    margin: 0;
+  }
+
+  button {
+    color: white;
+    border: 1px solid white;
+    border-radius: 2px;
+    background-color: #434850;
+  }
+}

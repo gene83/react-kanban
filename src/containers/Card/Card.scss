@@ -1,0 +1,56 @@
+.card {
+  box-sizing: border-box;
+
+  padding: 1em;
+  width: 100%;
+  margin: auto;
+  margin-bottom: 15px;
+
+  border: 2px solid;
+  border-radius: 5px;
+
+  .title {
+    margin: 0;
+  }
+
+  button {
+    padding-left: 0;
+    border: none;
+    font-size: 14px;
+  }
+
+  .assigned-to {
+    float: right;
+    font-weight: bold;
+  }
+}
+
+.status-1 {
+  border-color: #f7ad43;
+  background-color: #fdefd9;
+
+  button {
+    background-color: #fdefd9;
+    color: #f7ad43;
+  }
+}
+
+.status-2 {
+  border-color: #77c529;
+  background-color: #e1fdc3;
+
+  button {
+    background-color: #e1fdc3;
+    color: #77c529;
+  }
+}
+
+.status-3 {
+  border-color: #acb2c0;
+  background-color: #f6f7fb;
+
+  button {
+    background-color: #f6f7fb;
+    color: #acb2c0;
+  }
+}

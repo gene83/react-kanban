@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from '../../containers/Card';
-import './Column.css';
+import './Column.scss';
 
 const Column = props => {
   const { columnStatus } = props;
@@ -9,10 +9,12 @@ const Column = props => {
       return card.status_id === columnStatus;
     })
     .map(card => {
+      console.log(card.status_id);
       return (
         <Card
           key={card.id}
           id={card.id}
+          status_id={card.status_id}
           title={card.title}
           body={card.body}
           priority={card.priority}
@@ -40,8 +42,10 @@ const Column = props => {
 
   return (
     <div className="column">
-      <div className="columnTitle">{columnTitle}</div>
-      {cards}
+      <div className="columnTitle">
+        <h1>{columnTitle}</h1>
+      </div>
+      <div className="card-container">{cards}</div>
     </div>
   );
 };

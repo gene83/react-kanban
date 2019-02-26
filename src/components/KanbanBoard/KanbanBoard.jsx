@@ -1,6 +1,6 @@
 import React from 'react';
 import Column from '../Column';
-import './KanBanBoard.css';
+import './KanBanBoard.scss';
 
 const KanbanBoard = props => {
   const { cards } = props;

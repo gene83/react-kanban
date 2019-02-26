@@ -1,5 +1,6 @@
 import React from 'react';
 import LoginAndRegister from '../LoginAndRegister';
+import './Header.scss';
 
 const Header = props => {
   const {
@@ -18,7 +19,9 @@ const Header = props => {
         currentUser={currentUser}
         onLogoutClick={onLogoutClick}
       />
-      <div className="title">KANBAN</div>
+      <div className="title">
+        <h1>KANBAN</h1>
+      </div>
       <button className="add-card-button" onClick={onNewTaskClick}>
         NEW TASK
       </button>

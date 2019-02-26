@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deleteCard, showEditModal } from '../../actions';
+import './Card.scss';
 
 class Card extends Component {
   constructor(props) {
@@ -15,14 +16,14 @@ class Card extends Component {
 
   render() {
     return (
-      <div className="card">
-        <h4 className="title">{this.props.title}</h4>
+      <div className={'card status-' + this.props.status_id}>
+        <h3 className="title">{this.props.title}</h3>
         <div className="body"> {this.props.body}</div>
         <div className="priority">Priority: {this.props.priority}</div>
-        <div className="createdBy">Assigned by: {this.props.createdBy}</div>
+        <div className="created-by">Assigned by: {this.props.createdBy}</div>
         <button onClick={this.boundOnEditClick}>Edit</button>
         <button onClick={this.boundOnDeleteClick}>Delete</button>
-        <div className="assignedTo">Assigned To: {this.props.assignedTo}</div>
+        <div className="assigned-to">{this.props.assignedTo}</div>
       </div>
     );
   }

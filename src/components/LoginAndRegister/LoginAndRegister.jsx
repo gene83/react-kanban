@@ -1,4 +1,5 @@
 import React from 'react';
+import './LoginAndRegister.scss';
 
 const LoginAndRegister = props => {
   const { currentUser, onRegisterClick, onLoginClick, onLogoutClick } = props;
@@ -6,16 +7,18 @@ const LoginAndRegister = props => {
   if (currentUser) {
     return (
       <div className="username-logout">
-        {currentUser}
-        <button onClick={onLogoutClick}>Log Out</button>
+        <h4>{currentUser}</h4>
+        <div>
+          <button onClick={onLogoutClick}>Log Out</button>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="login-register">
-      <button onClick={onRegisterClick}>Register</button>
       <button onClick={onLoginClick}>Login</button>
+      <button onClick={onRegisterClick}>Register</button>
     </div>
   );
 };

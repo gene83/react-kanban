@@ -64,19 +64,21 @@ class LoginModal extends Component {
       <div className={this.makeModalClassName(this.props.show)}>
         <div className="modal-main">
           <form>
-            Username:
+            <div className="username">Username:</div>
             <input
               type="text"
               value={this.state.username}
               onChange={this.handleUsernameOnChange}
             />
-            Password:
+            <div className="password">Password:</div>
             <input
-              type="text"
+              type="password"
               value={this.state.password}
               onChange={this.handlePasswordOnChange}
             />
-            <button onClick={this.handleSubmit}>Login</button>
+            <div className="button">
+              <button onClick={this.handleSubmit}>Login</button>
+            </div>
           </form>
         </div>
       </div>

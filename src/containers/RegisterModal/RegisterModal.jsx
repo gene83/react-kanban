@@ -24,10 +24,10 @@ class RegisterModal extends Component {
 
   makeModalClassName(show) {
     if (show) {
-      return 'register-modal show-modal';
+      return 'modal register-modal show-modal';
     }
 
-    return 'register-modal hide-modal';
+    return 'modal register-modal hide-modal';
   }
 
   handleFirstNameOnChange(e) {
@@ -94,39 +94,41 @@ class RegisterModal extends Component {
   render() {
     return (
       <div className={this.makeModalClassName(this.props.show)}>
-        <form>
-          First Name:
-          <input
-            type="text"
-            value={this.state.first_name}
-            onChange={this.handleFirstNameOnChange}
-          />
-          Last Name:
-          <input
-            type="text"
-            value={this.state.last_name}
-            onChange={this.handleLastNameOnChange}
-          />
-          Email:
-          <input
-            type="text"
-            value={this.state.email}
-            onChange={this.handleEmailOnChange}
-          />
-          Username:
-          <input
-            type="text"
-            value={this.state.username}
-            onChange={this.handleUsernameOnChange}
-          />
-          Password:
-          <input
-            type="text"
-            value={this.state.password}
-            onChange={this.handlePasswordOnChange}
-          />
-          <button onClick={this.handleSubmit}>Register</button>
-        </form>
+        <div className="modal-main">
+          <form>
+            First Name:
+            <input
+              type="text"
+              value={this.state.first_name}
+              onChange={this.handleFirstNameOnChange}
+            />
+            Last Name:
+            <input
+              type="text"
+              value={this.state.last_name}
+              onChange={this.handleLastNameOnChange}
+            />
+            Email:
+            <input
+              type="text"
+              value={this.state.email}
+              onChange={this.handleEmailOnChange}
+            />
+            Username:
+            <input
+              type="text"
+              value={this.state.username}
+              onChange={this.handleUsernameOnChange}
+            />
+            Password:
+            <input
+              type="password"
+              value={this.state.password}
+              onChange={this.handlePasswordOnChange}
+            />
+            <button onClick={this.handleSubmit}>Register</button>
+          </form>
+        </div>
       </div>
     );
   }

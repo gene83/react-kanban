@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toggleLoginModal, loginUser } from '../../actions';
+import './LoginModal.scss';
 
 class LoginModal extends Component {
   constructor(props) {
@@ -18,10 +19,10 @@ class LoginModal extends Component {
 
   makeModalClassName(show) {
     if (show) {
-      return 'login-modal show-modal';
+      return 'modal login-modal show-modal';
     }
 
-    return 'login-modal hide-modal';
+    return 'modal login-modal hide-modal';
   }
 
   handleUsernameOnChange(e) {
@@ -61,21 +62,23 @@ class LoginModal extends Component {
   render() {
     return (
       <div className={this.makeModalClassName(this.props.show)}>
-        <form>
-          Username:
-          <input
-            type="text"
-            value={this.state.username}
-            onChange={this.handleUsernameOnChange}
-          />
-          Password:
-          <input
-            type="text"
-            value={this.state.password}
-            onChange={this.handlePasswordOnChange}
-          />
-          <button onClick={this.handleSubmit}>Login</button>
-        </form>
+        <div className="modal-main">
+          <form>
+            Username:
+            <input
+              type="text"
+              value={this.state.username}
+              onChange={this.handleUsernameOnChange}
+            />
+            Password:
+            <input
+              type="text"
+              value={this.state.password}
+              onChange={this.handlePasswordOnChange}
+            />
+            <button onClick={this.handleSubmit}>Login</button>
+          </form>
+        </div>
       </div>
     );
   }

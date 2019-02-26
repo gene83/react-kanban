@@ -27,10 +27,10 @@ class NewTaskModal extends Component {
 
   makeModalClassname(show) {
     if (show) {
-      return 'modal show-modal';
+      return 'modal new-modal show-modal';
     }
 
-    return 'modal hide-modal';
+    return 'modal new-modal hide-modal';
   }
 
   handleTitleOnChange(e) {
@@ -108,37 +108,39 @@ class NewTaskModal extends Component {
   render() {
     return (
       <div className={this.makeModalClassname(this.props.showNewTaskModal)}>
-        <form>
-          Title:
-          <input
-            type="text"
-            value={this.state.title}
-            onChange={this.handleTitleOnChange}
-          />
-          Body:
-          <input
-            type="text"
-            value={this.state.body}
-            onChange={this.handleBodyOnChange}
-          />
-          Priority:
-          <select onChange={this.handlePriorityIdOnChange}>
-            <option value="" />
-            <option value="1">Low</option>
-            <option value="2">Medium</option>
-            <option value="3">High</option>
-            <option value="4">Blocker</option>
-          </select>
-          CreatedBy:
-          <select onChange={this.handleCreatedByOnChange}>
-            {this.generateUserOptions(this.props.users)}
-          </select>
-          Assigned To:
-          <select onChange={this.handleAssignedToOnChange}>
-            {this.generateUserOptions(this.props.users)}
-          </select>
-          <button onClick={this.handleSubmit}>Create Task</button>
-        </form>
+        <div className="modal-main">
+          <form>
+            Title:
+            <input
+              type="text"
+              value={this.state.title}
+              onChange={this.handleTitleOnChange}
+            />
+            Body:
+            <input
+              type="text"
+              value={this.state.body}
+              onChange={this.handleBodyOnChange}
+            />
+            Priority:
+            <select onChange={this.handlePriorityIdOnChange}>
+              <option value="" />
+              <option value="1">Low</option>
+              <option value="2">Medium</option>
+              <option value="3">High</option>
+              <option value="4">Blocker</option>
+            </select>
+            CreatedBy:
+            <select onChange={this.handleCreatedByOnChange}>
+              {this.generateUserOptions(this.props.users)}
+            </select>
+            Assigned To:
+            <select onChange={this.handleAssignedToOnChange}>
+              {this.generateUserOptions(this.props.users)}
+            </select>
+            <button onClick={this.handleSubmit}>Create Task</button>
+          </form>
+        </div>
       </div>
     );
   }

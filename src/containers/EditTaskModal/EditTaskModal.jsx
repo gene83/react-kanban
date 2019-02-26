@@ -28,10 +28,10 @@ class EditTaskModal extends Component {
 
   makeModalClassName(show) {
     if (show) {
-      return 'edit-modal show-modal';
+      return 'modal edit-modal show-modal';
     }
 
-    return 'edit-modal hide-modal';
+    return 'modal edit-modal hide-modal';
   }
 
   handleTitleOnChange(e) {
@@ -124,44 +124,46 @@ class EditTaskModal extends Component {
   render() {
     return (
       <div className={this.makeModalClassName(this.props.editModalTaskId)}>
-        Edit Task: {this.props.editModalTaskId}
-        <form>
-          Title:
-          <input
-            type="text"
-            value={this.state.title}
-            onChange={this.handleTitleOnChange}
-          />
-          Body:
-          <input
-            type="text"
-            value={this.state.body}
-            onChange={this.handleBodyOnChange}
-          />
-          Status:
-          <select onChange={this.handleStatusOnChange}>
-            <option value="1">In Queue</option>
-            <option value="2">In Progress</option>
-            <option value="3">Done</option>
-          </select>
-          Priority:
-          <select onChange={this.handlePriorityOnChange}>
-            <option value="" />
-            <option value="1">Low</option>
-            <option value="2">Medium</option>
-            <option value="3">High</option>
-            <option value="4">Blocker</option>
-          </select>
-          CreatedBy:
-          <select onChange={this.handleCreatedByOnChange}>
-            {this.generateUserOptions(this.props.users)}
-          </select>
-          Assigned To:
-          <select onChange={this.handleAssignedToOnChange}>
-            {this.generateUserOptions(this.props.users)}
-          </select>
-          <button onClick={this.handleSubmit}>Edit Task</button>
-        </form>
+        <div className="modal-main">
+          Edit Task: {this.props.editModalTaskId}
+          <form>
+            Title:
+            <input
+              type="text"
+              value={this.state.title}
+              onChange={this.handleTitleOnChange}
+            />
+            Body:
+            <input
+              type="text"
+              value={this.state.body}
+              onChange={this.handleBodyOnChange}
+            />
+            Status:
+            <select onChange={this.handleStatusOnChange}>
+              <option value="1">In Queue</option>
+              <option value="2">In Progress</option>
+              <option value="3">Done</option>
+            </select>
+            Priority:
+            <select onChange={this.handlePriorityOnChange}>
+              <option value="" />
+              <option value="1">Low</option>
+              <option value="2">Medium</option>
+              <option value="3">High</option>
+              <option value="4">Blocker</option>
+            </select>
+            CreatedBy:
+            <select onChange={this.handleCreatedByOnChange}>
+              {this.generateUserOptions(this.props.users)}
+            </select>
+            Assigned To:
+            <select onChange={this.handleAssignedToOnChange}>
+              {this.generateUserOptions(this.props.users)}
+            </select>
+            <button onClick={this.handleSubmit}>Edit Task</button>
+          </form>
+        </div>
       </div>
     );
   }

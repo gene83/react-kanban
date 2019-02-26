@@ -6,7 +6,7 @@ import NewTaskModal from '../NewTaskModal';
 import EditTaskModal from '../EditTaskModal';
 import RegisterModal from '../RegisterModal';
 import LoginModal from '../LoginModal/LoginModal';
-import './App.css';
+import './App.scss';
 
 import {
   toggleAddModal,

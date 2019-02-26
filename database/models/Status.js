@@ -1,4 +1,5 @@
 const bookshelf = require('./bookshelf');
+require('./Card');
 
 class Status extends bookshelf.Model {
   get tableName() {
@@ -9,7 +10,7 @@ class Status extends bookshelf.Model {
   }
 
   cards() {
-    return this.hasMany('cards');
+    return this.hasMany('Card');
   }
 }
 

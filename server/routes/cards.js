@@ -5,12 +5,42 @@ const Card = require('../../database/models/Card');
 router.post('/', (req, res) => {
   const newCard = req.body;
 
-  newCard.status_id = 1;
-
   new Card(newCard)
     .save()
-    .then(() => {
-      return res.send('task posted succesfuly');
+    .then(addedCard => {
+      Card.where('id', addedCard.id)
+        .fetch({
+          withRelated: ['status', 'priority', 'createdBy', 'assignedTo']
+        })
+        .then(card => {
+          card = card.toJSON();
+
+          const {
+            id,
+            title,
+            body,
+            status_id,
+            priority_id,
+            created_by,
+            assigned_to
+          } = card;
+
+          const responseCard = {
+            id,
+            title,
+            body,
+            status_id,
+            priority_id,
+            created_by,
+            assigned_to,
+            status: card.status.name,
+            priority: card.priority.name,
+            assignedToName: card.assignedTo.first_name,
+            createdByName: card.createdBy.first_name
+          };
+
+          res.json(responseCard);
+        });
     })
     .catch(err => {
       return res.send(err);
@@ -18,8 +48,41 @@ router.post('/', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-  Card.fetchAll()
-    .then(cards => {
+  Card.fetchAll({
+    withRelated: ['status', 'priority', 'createdBy', 'assignedTo']
+  })
+    .then(cardList => {
+      cardList = cardList.toJSON();
+      const cards = [];
+
+      cardList.forEach(card => {
+        const {
+          id,
+          title,
+          body,
+          status_id,
+          priority_id,
+          created_by,
+          assigned_to
+        } = card;
+
+        const newCard = {
+          id,
+          title,
+          body,
+          status_id,
+          priority_id,
+          created_by,
+          assigned_to,
+          status: card.status.name,
+          priority: card.priority.name,
+          assignedToName: card.assignedTo.first_name,
+          createdByName: card.createdBy.first_name
+        };
+
+        cards.push(newCard);
+      });
+
       res.json(cards);
     })
     .catch(err => {
@@ -37,7 +100,39 @@ router.put('/:id', (req, res) => {
       card
         .save(editedCard)
         .then(() => {
-          res.send('card updated succesfully');
+          Card.where('id', id)
+            .fetch({
+              withRelated: ['status', 'priority', 'createdBy', 'assignedTo']
+            })
+            .then(card => {
+              card = card.toJSON();
+
+              const {
+                id,
+                title,
+                body,
+                status_id,
+                priority_id,
+                created_by,
+                assigned_to
+              } = card;
+
+              const responseCard = {
+                id,
+                title,
+                body,
+                status_id,
+                priority_id,
+                created_by,
+                assigned_to,
+                status: card.status.name,
+                priority: card.priority.name,
+                assignedToName: card.assignedTo.first_name,
+                createdByName: card.createdBy.first_name
+              };
+
+              res.json(responseCard);
+            });
         })
         .catch(err => {
           res.send(err);

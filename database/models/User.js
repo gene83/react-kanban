@@ -1,4 +1,5 @@
 const bookshelf = require('./bookshelf');
+require('./Card');
 
 class User extends bookshelf.Model {
   get tableName() {
@@ -8,8 +9,12 @@ class User extends bookshelf.Model {
     return true;
   }
 
-  cards() {
-    return this.hasMany('cards');
+  created() {
+    return this.hasMany('Card', 'id', 'created_by');
+  }
+
+  assigned() {
+    return this.hasMany('Card', 'id', 'assigned_to');
   }
 }
 

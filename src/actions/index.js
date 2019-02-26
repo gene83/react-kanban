@@ -39,10 +39,13 @@ export const addCard = newCard => {
         'Content-Type': 'application/json'
       }
     })
-      .then(() => {
+      .then(response => {
+        return response.json();
+      })
+      .then(addedCard => {
         return dispatch({
           type: ADD_CARD,
-          newCard: newCard
+          addedCard: addedCard
         });
       })
       .catch(err => {
@@ -73,7 +76,10 @@ export const editCard = editedCard => {
         'Content-Type': 'application/json'
       }
     })
-      .then(() => {
+      .then(response => {
+        return response.json();
+      })
+      .then(editedCard => {
         return dispatch({
           type: EDIT_CARD,
           editedCard: editedCard

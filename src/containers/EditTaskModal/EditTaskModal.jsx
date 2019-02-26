@@ -28,10 +28,10 @@ class EditTaskModal extends Component {
 
   makeModalClassName(show) {
     if (show) {
-      return 'modal edit-modal show-modal';
+      return 'modal show-modal';
     }
 
-    return 'modal edit-modal hide-modal';
+    return 'modal hide-modal';
   }
 
   handleTitleOnChange(e) {
@@ -124,7 +124,7 @@ class EditTaskModal extends Component {
   render() {
     return (
       <div className={this.makeModalClassName(this.props.editModalTaskId)}>
-        <div className="modal-main">
+        <div className="modal-main edit-modal">
           Edit Task: {this.props.editModalTaskId}
           <form>
             Title:

@@ -76,9 +76,7 @@ class LoginModal extends Component {
               value={this.state.password}
               onChange={this.handlePasswordOnChange}
             />
-            <div className="button">
-              <button onClick={this.handleSubmit}>Login</button>
-            </div>
+            <button onClick={this.handleSubmit}>Login</button>
           </form>
         </div>
       </div>

@@ -27,10 +27,10 @@ class NewTaskModal extends Component {
 
   makeModalClassname(show) {
     if (show) {
-      return 'modal new-modal show-modal';
+      return 'modal show-modal';
     }
 
-    return 'modal new-modal hide-modal';
+    return 'modal hide-modal';
   }
 
   handleTitleOnChange(e) {
@@ -108,21 +108,21 @@ class NewTaskModal extends Component {
   render() {
     return (
       <div className={this.makeModalClassname(this.props.showNewTaskModal)}>
-        <div className="modal-main">
+        <div className="modal-main new-modal">
           <form>
-            Title:
+            <div className="title">Title:</div>
             <input
               type="text"
               value={this.state.title}
               onChange={this.handleTitleOnChange}
             />
-            Body:
+            <div className="body">Body:</div>
             <input
               type="text"
               value={this.state.body}
               onChange={this.handleBodyOnChange}
             />
-            Priority:
+            <div className="priority">Priority:</div>
             <select onChange={this.handlePriorityIdOnChange}>
               <option value="" />
               <option value="1">Low</option>
@@ -130,11 +130,11 @@ class NewTaskModal extends Component {
               <option value="3">High</option>
               <option value="4">Blocker</option>
             </select>
-            CreatedBy:
+            <div className="created-by">CreatedBy:</div>
             <select onChange={this.handleCreatedByOnChange}>
               {this.generateUserOptions(this.props.users)}
             </select>
-            Assigned To:
+            <div className="assigned-to">Assigned To:</div>
             <select onChange={this.handleAssignedToOnChange}>
               {this.generateUserOptions(this.props.users)}
             </select>

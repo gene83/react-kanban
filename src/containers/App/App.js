@@ -6,14 +6,15 @@ import NewTaskModal from '../NewTaskModal';
 import EditTaskModal from '../EditTaskModal';
 import RegisterModal from '../RegisterModal';
 import LoginModal from '../LoginModal/LoginModal';
-import './App.css';
+import './App.scss';
 
 import {
   toggleAddModal,
   loadCards,
   toggleRegisterModal,
   toggleLoginModal,
-  loadUsers
+  loadUsers,
+  logout
 } from '../../actions';
 
 class App extends Component {
@@ -34,6 +35,8 @@ class App extends Component {
           onNewTaskClick={this.props.onNewTaskClick}
           onRegisterClick={this.props.onRegisterClick}
           onLoginClick={this.props.onLoginClick}
+          currentUser={this.props.currentUser}
+          onLogoutClick={this.props.onLogoutClick}
         />
 
         <KanbanBoard cards={this.props.cards} />
@@ -45,7 +48,8 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     cards: state.cards,
-    newTaskModalDisplay: state.newTaskModalDisplay
+    newTaskModalDisplay: state.newTaskModalDisplay,
+    currentUser: state.currentUser
   };
 };
 
@@ -69,6 +73,10 @@ const mapDispatchToProps = dispatch => {
 
     loadUsers: () => {
       dispatch(loadUsers());
+    },
+
+    onLogoutClick: () => {
+      dispatch(logout());
     }
   };
 };

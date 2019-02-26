@@ -10,16 +10,19 @@ export const REGISTER_USER = 'REGISTER_USER';
 export const TOGGLE_LOGIN_MODAL = 'TOGGLE_LOGIN_MODAL';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOAD_USERS = 'LOAD_USERS';
+export const LOGOUT = 'LOGOUT';
 
 export const deleteCard = id => {
   return dispatch => {
     return fetch(`/cards/${id}`, {
       method: 'DELETE'
-    }).then(() => {
-      return dispatch({
-        type: DELETE_CARD,
-        id: id
-      });
+    }).then(response => {
+      if (response.status !== 401) {
+        return dispatch({
+          type: DELETE_CARD,
+          id: id
+        });
+      }
     });
   };
 };
@@ -151,6 +154,7 @@ export const loginUser = user => {
       if (res.status === 401) {
         return;
       }
+
       return dispatch({
         type: LOGIN_USER,
         user: user.username
@@ -170,6 +174,25 @@ export const loadUsers = () => {
           type: LOAD_USERS,
           users: userList
         });
+      });
+  };
+};
+
+export const logout = () => {
+  return dispatch => {
+    return fetch('/logout')
+      .then(response => {
+        return response.json();
+      })
+      .then(response => {
+        if (response.success) {
+          return dispatch({
+            type: LOGOUT
+          });
+        }
+      })
+      .catch(err => {
+        throw err;
       });
   };
 };
